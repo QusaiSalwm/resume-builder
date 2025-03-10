@@ -1,0 +1,208 @@
+<div class="px-5 border-2 mt-8 border-black">
+  <div class="flex items-start gap-2">
+    <div class="image">
+      <img
+        src="images/solo-leveling-anime-smiling-evil-red-eyes-hd-wallpaper-preview.jpg"
+        width="330"
+        height="300"
+        alt=""
+      />
+    </div>
+    <div class="name">
+      <h3>{{ resumeData?.firstName }} {{ resumeData?.lastName }}</h3>
+    </div>
+  </div>
+
+  <div class="content grid grid-cols-2 gap-10">
+    <div class="left">
+      <div>
+        <div
+          class="mt-4"
+          *ngIf="resumeData?.skills && resumeData?.skills.length > 0"
+        >
+          <p
+            class="text-2xl font-normal border-b-2 border-b-gray-500 text-black w-full inline-block print:mt-5"
+          >
+            {{ "SKILLS" | translate }}
+          </p>
+          <ul class="text-sm px-2 py-2">
+            <li
+              [ngStyle]="{
+                color: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+              }"
+              *ngFor="let skill of resumeData?.skills"
+            >
+              <p class="text-black">{{ skill }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="mt-4"
+        *ngIf="resumeData?.training && resumeData?.training.length > 0"
+      >
+        <p
+          class="text-2xl border-b-2 border-b-gray-500 text-black w-full inline-block print:mt-5"
+        >
+          {{ "TRAINING" | translate }}
+        </p>
+
+        <div
+          class="mt-4 flex justify-between items-center"
+          *ngFor="let training of resumeData?.training"
+        >
+          <div>
+            <p class="font-semibold text-black">
+              {{ training?.specialization }}, {{ training?.diploma }}
+            </p>
+            <span class="text-sm text-gray-600 font-normal">
+              {{ training?.startDate | date }} –
+              {{ training?.endDate | date }}</span
+            >
+            <p class="text-gray-600 flex justify-between">
+              {{ training?.college }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mt-4 ">
+        <p
+          *ngIf="
+            resumeData?.address ||
+            resumeData?.zipCode ||
+            resumeData?.city ||
+            resumeData?.country ||
+            resumeData?.phone
+          "
+          class="text-2xl text-black border-b-2 border-b-gray-500  w-full inline-block print:mt-5"
+
+        >
+          {{ "CONTACT" | translate }}
+        </p>
+
+        <ul class="text-sm py-4">
+          <li
+            class="flex justify-center items-start gap-2 "
+            *ngIf="resumeData?.address"
+
+          >
+            <mat-icon class="mr-[5px]">location_on</mat-icon>
+            <span class="break-words max-w-md overflow-hidden">{{
+              resumeData?.address
+            }}</span>
+            <br />
+          </li>
+          <li
+            class="flex justify-start items-start gap-2"
+            *ngIf="resumeData?.zipCode || resumeData?.city"
+
+          >
+            <mat-icon>location_city</mat-icon>
+            <span class="leading-relaxed break-words max-w-md overflow-hidden"
+              >{{ resumeData?.zipCode }} {{ resumeData?.city }}</span
+            >
+          </li>
+          <li
+            class="flex justify-start items-start gap-2"
+            *ngIf="resumeData?.country"
+
+          >
+            <mat-icon>home</mat-icon>
+            <span
+              class="leading-relaxed break-words max-w-md overflow-hidden"
+              >{{ resumeData?.country }}</span
+            >
+          </li>
+          <li
+            class="flex justify-start items-start gap-2"
+            *ngIf="resumeData?.phone"
+
+          >
+            <mat-icon> phone</mat-icon>
+
+            <span
+              class="leading-relaxed break-words max-w-md overflow-hidden"
+              >{{ resumeData?.phone }}</span
+            >
+          </li>
+          <li
+            class="flex items-start"
+            *ngIf="resumeData?.email && resumeData?.email.length > 0"
+
+          >
+            <div>
+              <span *ngFor="let email of resumeData?.email; let isLast = last">
+                <p class="flex items-start gap-2">
+                  <mat-icon> email</mat-icon>
+
+                  {{ email }}<span *ngIf="!isLast"><br /></span>
+                </p>
+              </span>
+            </div>
+          </li>
+          <li
+            class="flex justify-start items-start gap-2"
+            *ngIf="resumeData?.birthDate || resumeData?.placeOfBirth"
+
+          >
+            <mat-icon>date_range</mat-icon>
+
+            <span class="whitespace-nowrap">{{
+              resumeData?.birthDate | date
+            }}</span>
+            ,
+          </li>
+
+          <li>
+            <span
+              class="leading-relaxed break-words max-w-md overflow-hidden"
+              >{{ resumeData?.placeOfBirth }}</span
+            >
+          </li>
+        </ul>
+      </div>
+
+
+      <div
+            class="mt-6"
+            *ngIf="resumeData?.experience && resumeData?.experience.length > 0"
+          >
+            <p
+              class="text-2xl text-black border-b-2 border-b-gray-500 w-full inline-block print:mt-5"
+            >
+              {{ "EXPERIENCE" | translate }}
+            </p>
+
+            <div *ngFor="let experience of resumeData?.experience" class="py-4">
+              <p class="font-semibold text-black flex justify-between">
+                {{ experience?.jobTitle }}
+                <span class="text-gray-500 text-xs"
+                  ><p class="text-sm text-gray-600">
+                    {{ experience?.startDate | date }}
+                    <span *ngIf="experience?.startDate">-</span>
+                    {{ experience?.endDate | date }}
+                  </p></span
+                >
+              </p>
+              <p class="text-gray-700">{{ experience?.employer }}</p>
+              <p class="text-gray-700">
+                {{ experience?.industry }}, {{ experience?.fieldOfActivity }},
+                {{ experience?.careerLevel }}
+              </p>
+
+              <ul
+                class="list-disc list-inside text-gray-600"
+                *ngFor="let task of experience?.tasks"
+              >
+                <li>
+                  {{ task }}
+                </li>
+              </ul>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>

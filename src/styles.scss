@@ -1,0 +1,107 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Tajawal:wght@400;700&display=swap');
+
+
+
+:root {
+  --background-color: white;
+  --text-color: #000000;
+  --app-font: 'Roboto', sans-serif;
+}
+
+[data-theme="dark"] {
+  --background-color: rgb(31, 41, 55);
+  --text-color: #ffffff;
+}
+
+[dir="rtl"] {
+  --app-font: 'Tajawal', sans-serif; /* Replace with your preferred Arabic font */
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: var(--app-font); }
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+
+}
+
+body {
+  margin: 0;
+}
+body:dir(ltr) {
+  font-family: "Poppins", sans-serif;
+}
+html:dir(ltr) {
+  font-family: "Poppins", sans-serif;
+}
+
+body:dir(rtl) *  {
+  font-family: "Tajawal", sans-serif;
+}
+html:dir(rtl)  *{
+  font-family: "Tajawal", sans-serif;
+}
+.mat-icon {
+  font-family: 'Material Icons', sans-serif !important;
+}
+.add-new-investment-btn{
+  margin-inline-end : 20px
+}
+
+
+.mat-icon, .material-icons {
+  font-family: 'Material Icons' !important;
+  font-style: normal;
+  font-weight: normal;
+  // font-size: 20px;
+  line-height: 1;
+}
+
+.tajawal-extralight {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+
+}
+
+.tajawal-light {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+
+}
+
+.tajawal-regular {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tajawal-medium {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.tajawal-bold {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.tajawal-extrabold {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.tajawal-black {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}

@@ -1,0 +1,301 @@
+<div class="bg-white flex justify-center py-10">
+  <div class="bg-white shadow-lg flex flex-col relative">
+    <!-- Header Section (Name & Image) -->
+    <div
+      class="text-white min-h-32 w-[700px] flex items-center p-6 relative"
+      [ngStyle]="{
+        'background-color':
+          selectedTheme === 'custom'
+            ? customColor
+            : colorThemesNew[selectedTheme].head,
+        color: 'white'
+      }"
+    >
+      <div class="w-2/3">
+        <h3
+          class="text-2xl font-bold"
+          *ngIf="resumeData?.firstName || resumeData?.lastName"
+        >
+          {{ resumeData?.firstName }} {{ resumeData?.lastName }}
+        </h3>
+      </div>
+      <div class="w-1/3 flex justify-end">
+        <img
+          *ngIf="resumeData?.profileImage"
+          [src]="resumeData?.profileImage"
+          alt="Profilbild"
+          class="w-40 h-40 rounded-full border shadow-md object-cover mb-2"
+        />
+      </div>
+    </div>
+
+    <div class="flex flex-1 min-h-[calc(100vh-8rem)]">
+      <!-- Left Sidebar (Fixed Full Height) -->
+      <div
+        class="w-1/3 text-white p-6 flex flex-col h-full"
+        [ngStyle]="{
+          'background-color':
+            selectedTheme === 'custom'
+              ? customColor
+              : colorThemesNew[selectedTheme].back,
+          color: 'white'
+        }"
+      >
+        <div class="mt-4">
+          <p
+            [ngStyle]="{
+              color: selectedTheme != 'gbRiAl' ? 'black' : 'white',
+              borderColor: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+            }"
+            *ngIf="
+              resumeData?.address ||
+              resumeData?.zipCode ||
+              resumeData?.city ||
+              resumeData?.country ||
+              resumeData?.phone
+            "
+            class="text-lg font-semibold border-2 px-2 rounded-full inline-block print:mt-5"
+          >
+            {{ "CONTACT" | translate }}
+          </p>
+
+          <ul class="text-sm space-y-2">
+            <li
+              class="flex justify-center items-start gap-2"
+              *ngIf="resumeData?.address"
+              [ngStyle]="{
+                color: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+              }"
+            >
+              <mat-icon>location_on</mat-icon>
+              <span
+                class="leading-relaxed break-words max-w-md overflow-hidden"
+                >{{ resumeData?.address }}</span
+              >
+              <br />
+            </li>
+            <li
+              class="flex justify-start items-start gap-2"
+              *ngIf="resumeData?.zipCode || resumeData?.city"
+              [ngStyle]="{
+                color: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+              }"
+            >
+              <mat-icon>location_city</mat-icon>
+              <span class="leading-relaxed break-words max-w-md overflow-hidden"
+                >{{ resumeData?.zipCode }} {{ resumeData?.city }}</span
+              >
+            </li>
+            <li
+              class="flex justify-center items-start gap-2"
+              *ngIf="resumeData?.country"
+              [ngStyle]="{
+                color: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+              }"
+            >
+              <mat-icon>home</mat-icon>
+              <span
+                class="leading-relaxed break-words max-w-md overflow-hidden"
+                >{{ resumeData?.country }}</span
+              >
+            </li>
+            <li
+              class="flex justify-start items-start gap-2"
+              *ngIf="resumeData?.phone"
+              [ngStyle]="{
+                color: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+              }"
+            >
+              <mat-icon> phone</mat-icon>
+
+              <span
+                class="leading-relaxed break-words max-w-full overflow-hidden"
+                >{{ resumeData?.phone }}</span
+              >
+            </li>
+            <li
+              class="flex items-start"
+              *ngIf="resumeData?.email && resumeData?.email.length > 0"
+              [ngStyle]="{
+                color: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+              }"
+            >
+              <div>
+                <span
+                  *ngFor="let email of resumeData?.email; let isLast = last"
+                >
+                  <p class="flex items-start gap-2">
+                    <mat-icon> email</mat-icon>
+
+                    {{ email }}<span *ngIf="!isLast"><br /></span>
+                  </p>
+                </span>
+              </div>
+            </li>
+            <li
+              class="flex items-center flex-wrap"
+              *ngIf="resumeData?.birthDate || resumeData?.placeOfBirth"
+              [ngStyle]="{
+                color: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+              }"
+            >
+              <mat-icon>date_range</mat-icon>
+
+              <span class="whitespace-nowrap">{{
+                resumeData?.birthDate | date
+              }}</span>
+              ,
+              <br />
+              <span
+                class="leading-relaxed break-words max-w-md overflow-hidden"
+                >{{ resumeData?.placeOfBirth }}</span
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="mt-6"
+          *ngIf="resumeData?.skills && resumeData?.skills.length > 0"
+        >
+          <p
+            [ngStyle]="{
+              color: selectedTheme != 'gbRiAl' ? 'black' : 'white',
+              borderColor: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+            }"
+            class="text-lg font-semibold border-2 px-4 py-1 rounded-full inline-block"
+          >
+            {{ "SKILLS" | translate }}
+          </p>
+          <ul class="text-sm px-2">
+            <li
+              [ngStyle]="{
+                color: selectedTheme != 'gbRiAl' ? 'black' : white
+              }"
+              *ngFor="let skill of resumeData?.skills"
+            >
+              <p>{{ skill }}</p>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="mt-6"
+          *ngIf="resumeData?.hobbies && resumeData?.hobbies.length > 0"
+        >
+          <p
+            [ngStyle]="{
+              color: selectedTheme != 'gbRiAl' ? 'black' : white,
+              borderColor: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+            }"
+            class="text-lg font-semibold border-2 px-4 py-1 rounded-full inline-block"
+          >
+            {{ "HOBBIES" | translate }}
+          </p>
+          <ul class="text-sm px-2">
+            <li *ngFor="let hobby of resumeData?.hobbies">
+              <mat-icon
+                [ngStyle]="{
+                  color: selectedTheme != 'gbRiAl' ? 'black' : white,
+                }"
+              >
+                {{ hobby }}</mat-icon
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-6 max-w-md overflow-hidden" *ngIf="resumeData?.aboutMe">
+          <p
+            [ngStyle]="{
+              color: selectedTheme != 'gbRiAl' ? 'black' : white,
+              borderColor: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+            }"
+            class="text-lg font-semibold border-2 px-4 py-1 rounded-full inline-block"
+          >
+            {{ "ABOUT_ME" | translate }}
+          </p>
+          <p
+            [ngStyle]="{
+              color: selectedTheme != 'gbRiAl' ? 'black' : 'white',
+            }"
+            class="mt-4 text-sm px-2 leading-relaxed break-words"
+          >
+            {{ resumeData?.aboutMe }}
+          </p>
+        </div>
+
+        <!-- <div class="mt-auto text-sm text-gray-300">Seite 1</div> -->
+      </div>
+
+      <!-- Right Content -->
+      <div class="w-2/3">
+        <div
+          class="mt-4"
+          *ngIf="resumeData?.training && resumeData?.training.length > 0"
+        >
+          <p
+            class="text-lg font-semibold text-white px-4 py-1 inline-block rounded-tr-full rounded-br-full rtl:rounded-tl-full rtl:rounded-bl-full rtl:rounded-tr-none rtl:rounded-br-none"
+            [ngStyle]="{
+              'background-color':
+                selectedTheme === 'custom'
+                  ? customColor
+                  : colorThemesNew[selectedTheme].head,
+              color: 'white',
+            }"
+          >
+            {{ "TRAINING" | translate }}
+          </p>
+          <div
+            *ngFor="let training of resumeData?.training"
+            class="mt-4 px-6 text-black"
+          >
+            <p class="font-semibold">{{ training?.college }}</p>
+            <p class="text-sm text-gray-600">
+              {{ training?.startDate | date }} – {{ training?.endDate | date }}
+            </p>
+            <p class="font-semibold">{{ training?.diploma }}</p>
+            <p class="font-semibold">{{ training?.specialization }}</p>
+          </div>
+        </div>
+
+        <div
+          class="mt-6"
+          *ngIf="resumeData?.experience && resumeData?.experience.length > 0"
+        >
+          <p
+            class="text-lg font-semibold text-white px-4 py-1 inline-block rounded-tr-full rounded-br-full rtl:rounded-tl-full rtl:rounded-bl-full rtl:rounded-tr-none rtl:rounded-br-none"
+            [ngStyle]="{
+              'background-color':
+                selectedTheme === 'custom'
+                  ? customColor
+                  : colorThemesNew[selectedTheme].head,
+              color: 'white'
+            }"
+          >
+            {{ "EXPERIENCE" | translate }}
+          </p>
+          <div
+            class="mt-4 px-6 text-black"
+            *ngFor="let experience of resumeData?.experience"
+          >
+            <p class="font-semibold">{{ experience?.employer }}</p>
+            <p class="text-sm text-gray-600">
+              {{ experience?.startDate | date }}
+              <span *ngIf="experience?.startDate">-</span>
+              {{ experience?.endDate | date }}
+            </p>
+            <p class="font-semibold">{{ experience?.jobTitle }}</p>
+            <p class="text-sm text-gray-600">
+              {{ experience?.industry }}, {{ experience?.fieldOfActivity }},
+              {{ experience?.careerLevel }}
+            </p>
+            <ul class="list-disc list-inside mt-2 text-sm">
+              <li *ngFor="let task of experience?.tasks">{{ task }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

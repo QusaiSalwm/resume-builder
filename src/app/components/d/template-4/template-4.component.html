@@ -1,0 +1,143 @@
+<div class="  bg-white shadow-md p-8 border mt-8 border-black">
+  <!-- Header Section -->
+  <div class="flex items-center border-b pb-6 mb-2">
+    <img
+      [src]="resumeData?.profileImage"
+      alt="Profilbild"
+      class="w-40 h-40 object-cover mr-6"
+    />
+    <div>
+      <p class="text-3xl font-bold">
+        {{ resumeData.firstName }} {{ resumeData.lastName }}
+      </p>
+      <div class="mt-2 space-y-1 text-gray-600 ">
+        <p
+          class="flex justify-center items-start gap-2"
+          *ngIf="resumeData?.address"
+        >
+          <mat-icon class="mr-[5px]">location_on</mat-icon>
+          <span class=" break-words max-w-full overflow-hidden break-all">{{
+            resumeData?.address
+          }}</span>
+          <br />
+        </p>
+        <div>
+          <span *ngFor="let email of resumeData?.email; let isLast = last">
+            <p class="flex items-start gap-2">
+              <mat-icon> email</mat-icon>
+
+              {{ email }}<span *ngIf="!isLast"><br /></span>
+            </p>
+          </span>
+        </div>
+        <p
+          class="flex justify-start items-start gap-2"
+          *ngIf="resumeData?.country"
+        >
+          <mat-icon>home</mat-icon>
+          <span class="leading-relaxed break-words max-w-md overflow-hidden">{{
+            resumeData?.country
+          }}</span>
+        </p>
+        <p
+          class="flex justify-start items-start gap-2"
+          *ngIf="resumeData?.phone"
+        >
+          <mat-icon> phone</mat-icon>
+
+          <span class="leading-relaxed break-words max-w-md overflow-hidden">{{
+            resumeData?.phone
+          }}</span>
+        </p>
+        <p
+          class="flex justify-start items-start gap-2"
+          *ngIf="resumeData?.birthDate || resumeData?.placeOfBirth"
+        >
+          <mat-icon>date_range</mat-icon>
+
+          <span class="whitespace-nowrap">{{
+            resumeData?.birthDate | date
+          }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction -->
+  <p
+    class="text-sm text-gray-600 mt-2 break-words max-w-md overflow-hidden items-center"
+  >
+    {{ resumeData.aboutMe }}
+  </p>
+
+  <!-- Berufliche Laufbahn -->
+  <p class="mt-8 text-xl font-semibold">{{"EXPERIENCE" | translate}}</p>
+  <div class="mt-4 border-l-4 pl-6"
+  [ngStyle]="{
+          'border-color':
+            selectedTheme === 'custom'
+              ? customColor
+              : colorThemesNew[selectedTheme].head,
+        }">
+    <div *ngFor="let job of resumeData.experience" class="relative mb-6">
+      <div
+        class="absolute -left-[33px] top-1 w-4 h-4  rounded-full"
+        [ngStyle]="{
+          'background-color':
+            selectedTheme === 'custom'
+              ? customColor
+              : colorThemesNew[selectedTheme].head,
+        }"
+      ></div>
+      <p class="text-gray-600">{{ job.startDate | date }} - {{job.endDate | date}}</p>
+      <p class="font-bold">{{ job.jobTitle }}</p>
+      <p class="text-gray-600">{{ job.employer }}</p>
+      <ul class="list-disc list-inside text-gray-700 text-sm mt-1">
+        <li *ngFor="let task of job.tasks">{{ task }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Ausbildung -->
+  <p class="mt-8 text-xl font-semibold">{{"TRAINING"}}</p>
+  <div class="mt-4 border-l-4  pl-6"
+  [ngStyle]="{
+          'border-color':
+            selectedTheme === 'custom'
+              ? customColor
+              : colorThemesNew[selectedTheme].head,
+
+        }">
+    <div *ngFor="let edu of resumeData.training" class="relative mb-6">
+      <div
+        class="absolute -left-[33px] top-1 w-4 h-4 rounded-full "
+        [ngStyle]="{
+          'background-color':
+            selectedTheme === 'custom'
+              ? customColor
+              : colorThemesNew[selectedTheme].head,
+        }"
+      ></div>
+      <p class="text-gray-600">{{ edu.startDate | date }} - {{edu.endDate | date}}</p>
+      <p class="font-bold">{{ edu.specialization }}</p>
+      <p class="text-gray-600">{{ edu.college }}</p>
+    </div>
+  </div>
+
+  <!-- EDV-Kenntnisse -->
+  <p class="mt-8 text-xl font-semibold">{{"SKILLS" | translate}}</p>
+  <div class="mt-4 flex gap-4">
+    <span
+      *ngFor="let skill of resumeData.skills"
+      class=" text-white px-2 py-2 rounded"
+      [ngStyle]="{
+          'background-color':
+            selectedTheme === 'custom'
+              ? customColor
+              : colorThemesNew[selectedTheme].head,
+
+        }"
+      >{{ skill }}</span
+    >
+  </div>
+</div>

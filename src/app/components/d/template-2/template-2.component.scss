@@ -1,0 +1,70 @@
+p{
+  margin: 0;
+}
+.clip{
+  clip-path: polygon(62.27% 46.37%, 62.07% 56.42%, 62.47% 63.69%, 63.69% 71.51%, 64.71% 74.86%, 64.71% 76.54%, 67.55% 84.92%, 67.95% 84.92%, 68.36% 86.59%, 68.76% 86.59%, 70.18% 89.94%, 70.79% 89.94%, 71.81% 91.62%, 74.44% 92.74%, 77.28% 92.74%, 80.73% 91.06%, 83.16% 88.27%, 83.57% 86.03%, 84.58% 84.92%, 87.22% 78.21%, 87.22% 77.09%, 87.83% 75.98%, 88.44% 72.07%, 88.84% 71.51%, 90.06% 63.13%, 90.47% 55.87%, 90.26% 45.81%, 88.64% 33.52%, 87.22% 29.05%, 87.22% 27.93%, 85.40% 22.91%, 84.99% 22.91%, 82.96% 18.44%, 79.72% 15.08%, 76.67% 13.97%, 73.83% 14.53%, 71.40% 16.20%, 69.17% 18.99%, 67.55% 22.91%, 67.14% 22.91%, 64.71% 30.17%, 64.71% 31.28%, 64.30% 31.84%, 64.10% 34.08%, 63.29% 36.87%, 62.27% 46.37%);
+  background-color: red;
+}
+
+.clippath{
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  clip-path: polygon(100% 0, 74% 100%, 0 55%, 0 0);
+  background-color: red;
+}
+.filled-triangle {
+    width: 400px;  /* Base width of the triangle */
+    height: 300px; /* Height of the triangle */
+    background-color: red;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      transform: rotate(120deg); /* Rotate the triangle */
+
+}
+
+.trapezoid {
+            width: 200px; /* عرض الشكل شبه المنحرف */
+            height: 100px; /* ارتفاع الشكل شبه المنحرف */
+            background-color: blue; /* لون الشكل */
+            clip-path: polygon(0% 100%, 100% 100%, 80% 0%, 20% 0%); /* شكل شبه المنحرف */
+            position: absolute; /* لجعل الشكل في زاوية الصفحة */
+            bottom: 0; /* وضعه في الأسفل */
+            left: 0; /* وضعه في اليسار */
+      transform: rotate(120deg); /* Rotate the triangle */
+
+        }
+.header {
+    display: flex; /* استخدام flexbox لتنسيق العناصر */
+    align-items: center; /* محاذاة العناصر عمودياً */
+    justify-content: space-between; /* توزيع العناصر في المساحة المتاحة */
+    padding: 20px;
+    background-color: #f0f0f0; /* لون خلفية الهيدر */
+}
+
+.trapezoid-left {
+    width: 200px; /* عرض الشكل شبه المنحرف الأيسر */
+    height: 100px; /* ارتفاع الشكل شبه المنحرف الأيسر */
+    background-color: blue; /* لون الشكل */
+    clip-path: polygon(0% 100%, 100% 100%, 80% 0%, 20% 0%); /* شكل شبه المنحرف الأيسر */
+    display: flex; /* استخدام flexbox داخل الشكل */
+    align-items: center; /* محاذاة النص عمودياً */
+    justify-content: center; /* محاذاة النص أفقياً */
+    color: white; /* لون النص */
+}
+
+.trapezoid-right {
+    width: 200px; /* عرض الشكل شبه المنحرف الأيمن */
+    height: 100px; /* ارتفاع الشكل شبه المنحرف الأيمن */
+    background-color: green; /* لون الشكل */
+    clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%); /* شكل شبه المنحرف الأيمن */
+    display: flex; /* استخدام flexbox داخل الشكل */
+    align-items: center; /* محاذاة الصورة عمودياً */
+    justify-content: center; /* محاذاة الصورة أفقياً */
+}
+
+.trapezoid-right img {
+    max-width: 80%; /* تحديد عرض الصورة */
+    max-height: 80%; /* تحديد ارتفاع الصورة */
+}

@@ -1,0 +1,31 @@
+<!-- color-switcher.component.html -->
+<div class="flex gap-2 justify-start px-2 ml-7 resume-container"
+  [ngStyle]="{
+  'margin-left': currentLang !== 'ar' ? '40px' : '0',
+    'margin-right': currentLang === 'ar' ? '40px' : '0'}">
+  <button
+    *ngFor="let color of colorThemes | keyvalue"
+    (click)="changeTheme(color.key)"
+    [ngStyle]="{
+      'background-color': color.key !== 'custom' ? color.value?.head : customColor,
+      'color': color.key !== 'custom' ? color.value?.head : ''
+    }"
+    class="w-[20px] h-[20px] md:w-10 md:h-10 rounded-full border-2 shadow-md"
+    [class.border-gray-800]="selectedTheme === color.key"
+  ></button>
+</div>
+
+
+<div class="flex items-center gap-4" *ngIf="false">
+  <label for="colorPicker" class="text-lg font-semibold"
+    >Pick a custom color:</label
+  >
+  <input
+  MatInput
+    type="color"
+    id="colorPicker"
+    [value]="customColor"
+    (input)="updateCustomColor($event)"
+    class="w-10 h-10 border rounded-full"
+  />
+</div>

@@ -1,0 +1,20 @@
+ <header
+    class="flex justify-between items-center flex-wrap px-6 py-4 bg-gray-800 text-white shadow-md"
+  >
+
+    <div class="flex items-center space-x-3">
+      <h5 class="text-lg font-semibold tracking-wide">Resume Builder</h5>
+    </div>
+
+    <div>
+      <mat-form-field class="w-50">
+        <mat-label>Select Language</mat-label>
+        <mat-select (selectionChange)="switchLanguage($event.value)">
+          <mat-option value="en">🇺🇸 English</mat-option>
+          <mat-option value="de">🇩🇪 Deutsch</mat-option>
+          <mat-option value="ar">🇸🇦 العربية</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <app-theme-switcher></app-theme-switcher>
+    </div>
+  </header>

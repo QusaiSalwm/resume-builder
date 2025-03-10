@@ -1,0 +1,13 @@
+@media print {
+  .text-sm {
+    font-size: 12px; /* Adjust for better readability in PDF */
+  }
+
+  .break-words {
+    word-wrap: break-word;
+  }
+
+  .overflow-visible {
+    overflow: visible;
+  }
+}

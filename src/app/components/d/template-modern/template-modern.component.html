@@ -1,0 +1,62 @@
+<!-- template1.component.html -->
+
+
+<div (click)="print()" class="w-full bg-white shadow-lg flex">
+  <!-- Left Sidebar -->
+
+  <aside
+    class="w-1/2 text-white  p-2 md:p-6"
+    [ngStyle]="{
+      'background-color':
+        selectedTheme === 'custom' ? customColor : colorThemesNew[selectedTheme]?.head,
+      color: 'white'
+    }"
+  >
+  <img [src]="resumeData?.profileImage" alt="">
+    <span class="text-sm md:text-lg font-semibold">{{ resumeData.fullName }}</span>
+    <p class="text-sm text-gray-300">{{ resumeData.jobTitle }}</p>
+
+    <section class="mt-6">
+      <span class="text-sm md:text-lg font-semibold border-b border-gray-600 pb-1 ">
+         Info
+      </span>
+      <ul class="text-sm mt-3 space-y-1">
+        <li><i class="fas fa-phone-alt"></i>{{ resumeData.phone }}</li>
+        <li><i class="fas fa-envelope"></i>{{ resumeData.email }}</li>
+      </ul>
+    </section>
+
+    <section class="mt-6">
+      <span class="text-sm md:text-lg font-semibold border-b border-gray-600 pb-1">
+        Skills
+      </span>
+      <ul class="text-sm mt-3 space-y-1">
+        <li *ngFor="let skill of resumeData.skills">{{ skill }}</li>
+      </ul>
+    </section>
+  </aside>
+
+ <main class="w-1/2 p-2 md:p-6 text-gray-800">
+    <section>
+        <p class="text-sm break-words overflow-hidden">
+            {{ resumeData.summary }}
+        </p>
+    </section>
+
+    <section class="mt-6">
+        <span class="text-sm md:text-lg font-semibold border-b border-gray-400 pb-1">
+            Experience
+        </span>
+
+        <div class="mt-4" *ngFor="let exp of resumeData.experience">
+            <p class="text-md font-semibold">{{ exp.company }}</p>
+            <p class="text-md font-semibold">{{ exp.jobTitle }}</p>
+
+            <p class="text-sm whitespace-nowrap md:text-xl text-gray-500">
+                {{ exp.startDate | date }} - {{ exp.endDate | date }}
+            </p>
+        </div>
+    </section>
+</main>
+
+</div>

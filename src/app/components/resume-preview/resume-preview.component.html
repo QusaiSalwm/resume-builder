@@ -1,0 +1,59 @@
+<div class="max-h-[700px] md:max-h-[2000px] relative" >
+  <app-color-switcher class="resume-container"></app-color-switcher>
+  <div>
+    <div id="resumeContent" *ngIf="resumeData.template === 'modern'">
+      <app-template-modern></app-template-modern>
+    </div>
+
+    <div id="resumeContent" *ngIf="resumeData.template === 'classic'">
+      <app-template-classic></app-template-classic>
+    </div>
+
+    <div id="resumeContent" *ngIf="resumeData.template === 'minimal'">
+      <app-template-minimal></app-template-minimal>
+    </div>
+
+    <div
+      *ngIf="resumeData.template === 'template-1' && currentLang"
+      [ngClass]="{
+        'transform-origin-right': currentLang === 'ar',
+        'transform-origin-left': currentLang !== 'ar'
+      }"
+
+    >
+      <app-template-1 id="resumeContent"></app-template-1>
+    </div>
+
+    <div *ngIf="resumeData.template === 'template-2'" class="resume-container">
+      <app-template-2 id="resumeContent"></app-template-2>
+    </div>
+
+    <div *ngIf="resumeData.template === 'template-3'" class="resume-container">
+      <app-template-3 id="resumeContent"></app-template-3>
+    </div>
+
+     <div
+      *ngIf="resumeData.template === 'template-4' && currentLang"
+      [ngClass]="{
+        'transform-origin-right': currentLang === 'ar',
+        'transform-origin-left': currentLang !== 'ar'
+      }"
+
+    >
+      <app-template-4 id="resumeContent"></app-template-4>
+    </div>
+
+    <div *ngIf="resumeData.template === 'template-5'" class="resume-container">
+      <app-template-5 id="resumeContent"></app-template-5>
+    </div>
+  </div>
+
+  <button
+  (click)="downloadPDF()"
+  class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 mb-10 absolute top-[70%]"
+>
+  Download as PDF
+</button>
+</div>
+
+

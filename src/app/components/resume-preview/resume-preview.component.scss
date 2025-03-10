@@ -1,0 +1,63 @@
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #resumeContent {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 0;
+    .preview-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .preview-wrapper {
+      width: 250px; /* Adjust preview size */
+      height: 350px; /* Maintain aspect ratio */
+      overflow: hidden;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      background: white;
+      position: relative;
+    }
+
+    .preview-content {
+      transform: scale(0.3); /* Scale down the actual content */
+      transform-origin: top left;
+      width: 800px; /* Original resume width */
+      height: 1120px; /* Original resume height */
+    }
+
+    .pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+}
+@media (max-width: 640px) {
+  .resume-container {
+    transform: scale(0.5);
+    transform-origin: top left;
+    width: 200.86%;
+  }
+
+  .transform-origin-right {
+    transform: scale(0.5);
+    width: 200.86%;
+  transform-origin: top right;
+}
+
+.transform-origin-left {
+   transform: scale(0.5);
+    width: 200.86%;
+  transform-origin: top left;
+}
+}
+
