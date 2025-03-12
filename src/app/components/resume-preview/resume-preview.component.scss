@@ -43,21 +43,26 @@
 }
 @media (max-width: 640px) {
   .resume-container {
-    transform: scale(0.5);
-    transform-origin: top left;
-    width: 200.86%;
+
+    height: auto; /* Adjust height to auto */
+    overflow: hidden; /* Hide any overflow if necessary */
   }
 
   .transform-origin-right {
     transform: scale(0.5);
     width: 200.86%;
-  transform-origin: top right;
+    max-height: 50% !important;
+    transform-origin: top right;
+    height: auto; /* Adjust height to auto */
+  }
+
+  .transform-origin-left {
+    transform: scale(0.5);
+    width: 200.86%;
+    max-height: 50% !important;
+    transform-origin: top left;
+    height: auto; /* Adjust height to auto */
+  }
 }
 
-.transform-origin-left {
-   transform: scale(0.5);
-    width: 200.86%;
-  transform-origin: top left;
-}
-}
 

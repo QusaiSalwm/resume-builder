@@ -5,6 +5,9 @@ mat-icon{
 mat-icon{
   overflow: visible;
 }
-
+.scale{
+ transform: scale(0.3);
+ transform-origin: left top;
+}
 
 

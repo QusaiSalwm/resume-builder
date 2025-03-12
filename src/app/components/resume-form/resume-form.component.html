@@ -79,7 +79,7 @@
     <div *ngFor="let email of emailControls.controls; let i = index">
       <mat-form-field class="w-full text-sm">
         <mat-label>{{ "ADD_EMAIL" | translate }}</mat-label>
-        <input matInput [formControlName]="i" />
+        <input matInput type="email" [formControlName]="i" />
       </mat-form-field>
       <button mat-button color="warn" class="text-lg" (click)="removeEmail(i)">
         {{ "REMOVE_EMAIL" | translate }}
@@ -339,7 +339,7 @@
     </div>
   </div>
 </form>
-<div class="mt-10 mb-5">
+<div class="mt-10 mb-5 flex gap-4">
   <button mat-raised-button color="primary" (click)="exportJson()">
     Export JSON
   </button>

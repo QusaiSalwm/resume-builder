@@ -34,14 +34,14 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatInputModule,
     MatDatepickerModule,
   ],
-  providers:[provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './resume-form.component.html',
   styleUrl: './resume-form.component.scss',
 })
 export class ResumeFormComponent implements OnInit {
   form: FormGroup;
   profileImage: string | ArrayBuffer | null = null;
-  resumeData :any
+  resumeData: any;
 
   constructor(private fb: FormBuilder, private resumeService: ResumeService) {
     this.form = this.fb.group({
@@ -67,7 +67,6 @@ export class ResumeFormComponent implements OnInit {
       this.resumeService.updateResumeData(values);
       this.saveToLocalStorage();
     });
-
   }
 
   hobbiesList = [
@@ -85,7 +84,6 @@ export class ResumeFormComponent implements OnInit {
   ngOnInit(): void {
     this.loadFromLocalStorage();
     this.resumeData = this.resumeService.getResumeData();
-
   }
 
   onImageSelected(event: any) {
@@ -268,6 +266,14 @@ export class ResumeFormComponent implements OnInit {
             });
           }
 
+          if (jsonData.eamil) {
+            // Instead of jsonData.education
+            this.emailControls.clear();
+            jsonData.eamail.forEach((edu: any) => {
+              this.emailControls.push(this.fb.control(edu));
+            });
+          }
+
           if (jsonData.skills) {
             this.skillsControls.clear();
             jsonData.skills.forEach((skill: string) => {
@@ -288,10 +294,8 @@ export class ResumeFormComponent implements OnInit {
   }
 
   loadFromLocalStorage() {
-
     if (typeof window !== 'undefined') {
       const savedData: any = localStorage.getItem('resumeData');
-
 
       if (savedData) {
         const jsonData = JSON.parse(savedData);
@@ -334,6 +338,14 @@ export class ResumeFormComponent implements OnInit {
           });
         }
 
+         if (jsonData.email) {
+           // Instead of jsonData.education
+           this.emailControls.clear();
+           jsonData.email.forEach((edu: any) => {
+             this.emailControls.push(this.fb.control(edu));
+           });
+         }
+
         if (jsonData.skills) {
           this.skillsControls.clear();
           jsonData.skills.forEach((skill: string) => {
@@ -342,7 +354,7 @@ export class ResumeFormComponent implements OnInit {
         }
 
         if (jsonData.hobbies) {
-          this.hobbiesControls.slice()
+          this.hobbiesControls.slice();
           jsonData.hobbies.forEach((hobby: string) => {
             this.hobbiesControls.push(this.fb.control(hobby));
           });

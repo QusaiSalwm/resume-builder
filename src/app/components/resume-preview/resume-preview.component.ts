@@ -34,6 +34,7 @@ import { Template4Component } from "../d/template-4/template-4.component";
 })
 export class ResumePreviewComponent {
   resumeData: any = {};
+  resumeTemplate :any
   currentLang: any;
 
   @ViewChild('resumeContent', { static: false }) resumeContent!: ElementRef;
@@ -45,6 +46,12 @@ export class ResumePreviewComponent {
     this.resumeService.getResumeData().subscribe((data) => {
       this.resumeData = data;
     });
+  }
+
+  saveResumeTemplate() {
+    if (window != undefined) {
+      localStorage.setItem('template',this.resumeData.value.template)
+    }
   }
 
   // downloadPDF() {
