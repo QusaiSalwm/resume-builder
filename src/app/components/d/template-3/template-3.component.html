@@ -1,8 +1,8 @@
-<div class="px-5 border mt-8 shadow-md bg-white border-black min-h-[calc(100vh-2rem)]">
+<div class="px-5 border bg-white border-black w-[210mm] min-h-[297mm]">
   <div class="flex items-start gap-2">
     <div class="image">
       <img
-      *ngIf="resumeData?.profileImage"
+        *ngIf="resumeData?.profileImage"
         [src]="resumeData?.profileImage"
         width="330"
         height="300"
@@ -16,19 +16,18 @@
 
   <div class="content grid grid-cols-2 gap-10">
     <div class="left">
-       <div class="mt-4 max-w-md overflow-hidden" *ngIf="resumeData?.aboutMe">
-          <p
-            class="text-2xl font-normal text-black border-b-2 border-b-gray-500 w-full inline-block print:mt-5"
-          >
-            {{ "ABOUT_ME" | translate }}
-          </p>
-          <p
-
-            class="mt-4 text-sm text-black px-2 py-4 leading-relaxed break-words"
-          >
-            {{ resumeData?.aboutMe }}
-          </p>
-        </div>
+      <div class="mt-4 max-w-md overflow-hidden" *ngIf="resumeData?.aboutMe">
+        <p
+          class="text-2xl font-normal text-black border-b-2 border-b-gray-500 w-full inline-block print:mt-5"
+        >
+          {{ "ABOUT_ME" | translate }}
+        </p>
+        <p
+          class="mt-4 text-sm text-black px-2 py-4 leading-relaxed break-words"
+        >
+          {{ resumeData?.aboutMe }}
+        </p>
+      </div>
       <div>
         <div
           class="mt-4"
@@ -71,8 +70,8 @@
               {{ training?.specialization }}, {{ training?.diploma }}
             </p>
             <span class="text-sm text-gray-600 font-normal">
-              {{ training?.startDate | date }} –
-              {{ training?.endDate | date }}</span
+              {{ training?.startDate |  date:'dd/MM/yyyy'  }} –
+              {{ training?.endDate |  date:'dd/MM/yyyy'  }}</span
             >
             <p class="text-gray-600 flex justify-between">
               {{ training?.college }}
@@ -82,7 +81,7 @@
       </div>
     </div>
     <div class="right">
-      <div class="mt-4 ">
+      <div class="mt-4">
         <p
           *ngIf="
             resumeData?.address ||
@@ -91,20 +90,18 @@
             resumeData?.country ||
             resumeData?.phone
           "
-          class="text-2xl text-black border-b-2 border-b-gray-500  w-full inline-block print:mt-5"
-
+          class="text-2xl text-black border-b-2 border-b-gray-500 w-full inline-block print:mt-5"
         >
           {{ "CONTACT" | translate }}
         </p>
 
-        <ul class="text-sm py-4">
+        <ul class="text-sm py-4 overflow-hidden">
           <li
-            class="flex justify-start items-start gap-2 "
+            class="flex justify-start items-start gap-2"
             *ngIf="resumeData?.address"
-
           >
             <mat-icon class="mr-[5px]">location_on</mat-icon>
-            <span class="break-words max-w-md overflow-hidden">{{
+            <span class="break-words max-w-md ">{{
               resumeData?.address
             }}</span>
             <br />
@@ -112,40 +109,36 @@
           <li
             class="flex justify-start items-start gap-2"
             *ngIf="resumeData?.zipCode || resumeData?.city"
-
           >
             <mat-icon>location_city</mat-icon>
-            <span class="leading-relaxed break-words max-w-md overflow-hidden"
+            <span class="leading-relaxed break-words max-w-md "
               >{{ resumeData?.zipCode }} {{ resumeData?.city }}</span
             >
           </li>
           <li
             class="flex justify-start items-start gap-2"
             *ngIf="resumeData?.country"
-
           >
             <mat-icon>home</mat-icon>
             <span
-              class="leading-relaxed break-words max-w-md overflow-hidden"
+              class="leading-relaxed break-words max-w-md "
               >{{ resumeData?.country }}</span
             >
           </li>
           <li
             class="flex justify-start items-start gap-2"
             *ngIf="resumeData?.phone"
-
           >
             <mat-icon> phone</mat-icon>
 
             <span
-              class="leading-relaxed break-words max-w-md overflow-hidden"
+              class="leading-relaxed break-words max-w-md "
               >{{ resumeData?.phone }}</span
             >
           </li>
           <li
             class="flex items-start"
             *ngIf="resumeData?.email && resumeData?.email.length > 0"
-
           >
             <div>
               <span *ngFor="let email of resumeData?.email; let isLast = last">
@@ -160,63 +153,65 @@
           <li
             class="flex justify-start items-start gap-2"
             *ngIf="resumeData?.birthDate || resumeData?.placeOfBirth"
-
           >
             <mat-icon>date_range</mat-icon>
 
             <span class="whitespace-nowrap">{{
-              resumeData?.birthDate | date
+              resumeData?.birthDate |  date:'dd/MM/yyyy'
             }}</span>
-            , <span
+            ,
+            <span
               class="leading-relaxed break-words max-w-md overflow-hidden"
               >{{ resumeData?.placeOfBirth }}</span
             >
           </li>
 
-          <li>
-
-          </li>
+          <li></li>
         </ul>
       </div>
 
-
       <div
-            class="mt-6"
-            *ngIf="resumeData?.experience && resumeData?.experience.length > 0"
-          >
-            <p
-              class="text-2xl text-black border-b-2 border-b-gray-500 w-full inline-block print:mt-5"
-            >
-              {{ "EXPERIENCE" | translate }}
-            </p>
+        class="mt-6"
+        *ngIf="resumeData?.experience && resumeData?.experience.length > 0"
+      >
+        <p
+          class="text-2xl text-black border-b-2 border-b-gray-500 w-full inline-block print:mt-5"
+        >
+          {{ "EXPERIENCE" | translate }}
+        </p>
 
-            <div *ngFor="let experience of resumeData?.experience" class="py-4">
-              <p class="font-semibold text-black flex justify-between">
-                {{ experience?.jobTitle }}
-                <span class="text-gray-500 text-xs"
-                  ><p class="text-sm text-gray-600">
-                    {{ experience?.startDate | date }}
-                    <span *ngIf="experience?.startDate">-</span>
-                    {{ experience?.endDate | date }}
-                  </p></span
+        <div *ngFor="let experience of resumeData?.experience" class="py-4">
+          <p class="font-semibold text-black flex justify-between">
+            {{ experience?.jobTitle }}
+            <span class="text-gray-500 text-xs"
+              ><p class="text-sm text-gray-600">
+                {{ experience?.startDate |  date:'dd/MM/yyyy'  }}
+                <span *ngIf="experience?.startDate">-</span>
+                <span *ngIf="!experience.stillInWork">
+                  {{ experience?.endDate |  date:'dd/MM/yyyy'  }}</span
                 >
-              </p>
-              <p class="text-gray-700">{{ experience?.employer }}</p>
-              <p class="text-gray-700">
-                {{ experience?.industry }}, {{ experience?.fieldOfActivity }},
-                {{ experience?.careerLevel }}
-              </p>
+                <span *ngIf="experience.stillInWork">
+                  {{ "NOW" | translate }}</span
+                >
+              </p></span
+            >
+          </p>
+          <p class="text-gray-700">{{ experience?.employer }}</p>
+          <p class="text-gray-700">
+            {{ experience?.industry }}, {{ experience?.fieldOfActivity }},
+            {{ experience?.careerLevel }}
+          </p>
 
-              <ul
-                class="list-disc list-inside text-gray-600"
-                *ngFor="let task of experience?.tasks"
-              >
-                <li>
-                  {{ task }}
-                </li>
-              </ul>
-            </div>
-          </div>
+          <ul
+            class="list-disc list-inside text-gray-600"
+            *ngFor="let task of experience?.tasks"
+          >
+            <li>
+              {{ task }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

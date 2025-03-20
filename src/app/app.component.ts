@@ -8,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 
-
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -19,6 +18,8 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { FormsModule } from '@angular/forms';
 import { LanguageService } from './services/language.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ResumeDialogComponent } from './components/resume-dialog/resume-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -36,8 +37,9 @@ import { LanguageService } from './services/language.service';
     FormsModule,
     MatIconModule,
     MatSidenavModule,
-    MatMenuModule
-  ],
+    MatMenuModule,
+    FinalPreviewComponent
+],
   providers: [ThemeService],
 
   templateUrl: './app.component.html',
@@ -62,7 +64,8 @@ export class AppComponent {
 
   constructor(
     private translate: TranslateService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private dialog: MatDialog
   ) {
     if (typeof window !== 'undefined') {
       this.myLang = localStorage.getItem('lang') || 'en';
@@ -91,5 +94,14 @@ export class AppComponent {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  dir: any;
+
+  openPreviewDialog() {
+    this.dialog.open(ResumeDialogComponent, {
+      width: '90vw',
+      height: '90vh',
+    });
   }
 }

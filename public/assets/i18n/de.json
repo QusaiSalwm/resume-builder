@@ -13,6 +13,7 @@
   "EMAIL": "E-Mail",
   "EXPERIEECE": "Erfahrung",
   "ADD_EXPERIEECE": "Erfahrung hinzufügen",
+  "REMOVE_EXPERIENCE": "Erfahrung entfernen",
   "JOB_TITLE": "Berufsbezeichnung",
   "EMPLOYER": "Arbeitgeber",
   "INDUSTRY": "Branche",
@@ -36,5 +37,19 @@
   "REMOVE_SKILL": "Fähigkeit entfernen",
   "HOPPIES": "Hobbys",
   "ADD_HOPPY": "Hobby hinzufügen",
-  "REMOVE_HOPPY": "Hobby entfernen"
+  "REMOVE_HOPPY": "Hobby entfernen",
+  "CANCEL": "Abbrechen",
+  "SAVE": "Speichern",
+  "NOW": "Jetzt",
+  "STILL_IN_WORK": "Noch in Arbeit",
+  "REMOVE": "Entfernen",
+  "LANGUAGES": "Sprachen",
+  "LANGUAGE": "Sprache",
+  "ADD_LANGUAGE": "Sprache hinzufügen",
+  "REMOVE_LANGUAGE": "Sprache entfernen",
+  "LEVEL": "Niveau",
+  "IMPORT_JSON": "JSON importieren",
+  "EXPORT_JSON": "JSON exportieren",
+  "PRINT": "Drucken",
+  "PREVIEW": "Vorschau"
 }

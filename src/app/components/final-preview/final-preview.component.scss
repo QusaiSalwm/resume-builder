@@ -1,0 +1,23 @@
+   /* paginated-content.component.css */
+   .page-container {
+     max-height: 400px; /* ارتفاع الصفحة */
+     overflow-y: auto; /* يسمح بالتمرير العمودي */
+     border: 1px solid #ccc; /* إضافة حدود للصفحة */
+     padding: 10px; /* إضافة بعض الحشو */
+   }
+
+   .page {
+     page-break-after: always; /* كسر الصفحة بعد كل صفحة */
+     margin-bottom: 20px; /* إضافة مسافة بين الصفحات */
+   }
+
+   .pagination {
+     display: flex;
+     justify-content: center;
+     margin-top: 10px;
+   }
+
+   .pagination button {
+     margin: 0 5px;
+   }
+

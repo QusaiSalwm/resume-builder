@@ -2,14 +2,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Tajawal:wght@400;700&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Tajawal:wght@400;700&display=swap");
 
 :root {
   --background-color: white;
   --text-color: #000000;
-  --app-font: 'Roboto', sans-serif;
+  --app-font: "Roboto", sans-serif;
 }
 
 [data-theme="dark"] {
@@ -18,16 +16,21 @@
 }
 
 [dir="rtl"] {
-  --app-font: 'Tajawal', sans-serif; /* Replace with your preferred Arabic font */
+  --app-font: "Tajawal", sans-serif; /* Replace with your preferred Arabic font */
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: var(--app-font); }
 body {
+  margin: 0;
+  font-family: var(--app-font);
+}
+body,
+html {
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
-
+  max-height: 100vh;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -40,22 +43,22 @@ html:dir(ltr) {
   font-family: "Poppins", sans-serif;
 }
 
-body:dir(rtl) *  {
+body:dir(rtl) * {
   font-family: "Tajawal", sans-serif;
 }
-html:dir(rtl)  *{
+html:dir(rtl) * {
   font-family: "Tajawal", sans-serif;
 }
 .mat-icon {
-  font-family: 'Material Icons', sans-serif !important;
+  font-family: "Material Icons", sans-serif !important;
 }
-.add-new-investment-btn{
-  margin-inline-end : 20px
+.add-new-investment-btn {
+  margin-inline-end: 20px;
 }
 
-
-.mat-icon, .material-icons {
-  font-family: 'Material Icons' !important;
+.mat-icon,
+.material-icons {
+  font-family: "Material Icons" !important;
   font-style: normal;
   font-weight: normal;
   // font-size: 20px;
@@ -66,14 +69,12 @@ html:dir(rtl)  *{
   font-family: "Tajawal", sans-serif;
   font-weight: 200;
   font-style: normal;
-
 }
 
 .tajawal-light {
   font-family: "Tajawal", sans-serif;
   font-weight: 300;
   font-style: normal;
-
 }
 
 .tajawal-regular {

@@ -1,7 +1,14 @@
- @media (max-width: 640px) {
-      // .resume-container {
-      //   transform: scale(0.4); /* Adjust scale value as needed */
-      //   transform-origin: top left;
-      //   width: 200.86%; /* Counteract the scaling to prevent extra space (100 / 0.7) */
-      // }
-    }
+
+.resume-container {
+  margin-inline-start: 100px;
+}
+@media (max-width: 767px) {
+  // .resume-container {
+  //   transform: scale(0.4); /* Adjust scale value as needed */
+  //   transform-origin: top left;
+  //   width: 200.86%; /* Counteract the scaling to prevent extra space (100 / 0.7) */
+  // }
+  .resume-container {
+    margin-inline-start: 0px;
+  }
+}

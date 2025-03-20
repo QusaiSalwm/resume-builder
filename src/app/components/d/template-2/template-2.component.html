@@ -1,24 +1,32 @@
-<div class="bg-white flex justify-center py-10">
-  <div class="bg-white shadow-lg flex flex-col relative overflow-hidden">
+<div class="">
+  <div class="bg-white w-[210mm] min-h-[297mm]">
     <!-- Header Section (Name & Image) -->
     <div
-      class="text-black bg-gray-600 min-h-32 w-[700px] flex items-center p-6 relative"
+      class="flex justify-between items-center"
+      [ngStyle]="{
+        'background-color':
+          selectedTheme === 'custom'
+            ? customColor
+            : colorThemesNew[selectedTheme].head,
+        color: 'white'
+      }"
     >
-      <!-- <header class="header">
-        <div class="trapezoid-left">
-            <h1>اسمك هنا</h1>
-        </div>
-        <div class="trapezoid-right">
-            <img src="image.jpg" alt="صورة" />
-        </div>
-    </header> -->
-      <div class="w-2/3 flex justify-between clippath">
-        <h3
-          class="text-2xl font-bold"
+      <div
+        class="flex justify-between clippath"
+        [ngStyle]="{
+          'background-color':
+            selectedTheme === 'custom'
+              ? customColor
+              : colorThemesNew[selectedTheme].back,
+          color: 'white'
+        }"
+      >
+        <h5
+          class="text-xl font-bold name"
           *ngIf="resumeData?.firstName || resumeData?.lastName"
         >
           {{ resumeData?.firstName }} {{ resumeData?.lastName }}
-        </h3>
+        </h5>
       </div>
       <div class="w-1/3">
         <img
@@ -30,9 +38,9 @@
       </div>
     </div>
 
-    <div class="flex flex-1 p-6 min-h-[calc(100vh-8rem)]">
+    <div class="flex flex-1">
       <!-- Left Sidebar (Fixed Full Height) -->
-      <div class="w-1/3 flex flex-col h-full">
+      <div class="w-1/3 flex flex-col px-3">
         <div class="mt-6">
           <p
             *ngIf="
@@ -47,13 +55,12 @@
             {{ "CONTACT" | translate }}
           </p>
 
-          <ul class="text-sm py-4">
+          <ul class="text-sm py-4 overflow-hidden">
             <li class="flex items-center flex-wrap" *ngIf="resumeData?.address">
               <mat-icon>location_on</mat-icon>
-              <span
-                class="leading-relaxed break-words max-w-md overflow-hidden"
-                >{{ resumeData?.address }}</span
-              >
+              <span class="leading-relaxed break-words max-w-md">{{
+                resumeData?.address
+              }}</span>
               <br />
             </li>
             <li
@@ -64,7 +71,7 @@
               }"
             >
               <mat-icon>location_city</mat-icon>
-              <span class="leading-relaxed break-words max-w-md overflow-hidden"
+              <span class="leading-relaxed break-words max-w-md"
                 >{{ resumeData?.zipCode }} {{ resumeData?.city }}</span
               >
             </li>
@@ -76,10 +83,9 @@
               }"
             >
               <mat-icon>home</mat-icon>
-              <span
-                class="leading-relaxed break-words max-w-md overflow-hidden"
-                >{{ resumeData?.country }}</span
-              >
+              <span class="leading-relaxed break-words max-w-md">{{
+                resumeData?.country
+              }}</span>
             </li>
             <li
               class="flex items-center flex-wrap"
@@ -90,10 +96,9 @@
             >
               <mat-icon> phone</mat-icon>
 
-              <span
-                class="leading-relaxed break-words max-w-md overflow-hidden"
-                >{{ resumeData?.phone }}</span
-              >
+              <span class="leading-relaxed break-words max-w-md">{{
+                resumeData?.phone
+              }}</span>
             </li>
             <li
               class="flex items-start"
@@ -124,7 +129,7 @@
               <mat-icon>date_range</mat-icon>
 
               <span class="whitespace-nowrap">{{
-                resumeData?.birthDate | date
+                resumeData?.birthDate |  date:'dd/MM/yyyy'
               }}</span>
               ,
               <br />
@@ -163,10 +168,7 @@
           >
             {{ "ABOUT_ME" | translate }}
           </p>
-          <p
-            
-            class="mt-4 text-sm px-2 py-4 leading-relaxed break-words"
-          >
+          <p class="mt-4 text-sm px-2 py-4 leading-relaxed break-words">
             {{ resumeData?.aboutMe }}
           </p>
         </div>
@@ -191,9 +193,14 @@
               {{ experience?.jobTitle }}
               <span class="text-gray-500 text-xs"
                 ><p class="text-sm text-gray-600">
-                  {{ experience?.startDate | date }}
+                  {{ experience?.startDate |  date:'dd/MM/yyyy'  }}
                   <span *ngIf="experience?.startDate">-</span>
-                  {{ experience?.endDate | date }}
+                  <span *ngIf="!experience.stillInWork">
+                    {{ experience?.endDate |  date:'dd/MM/yyyy'  }}</span
+                  >
+                  <span *ngIf="experience.stillInWork">
+                    {{ "NOW" | translate }}</span
+                  >
                 </p></span
               >
             </p>
@@ -249,8 +256,8 @@
               </p>
             </div>
             <span class="text-sm text-gray-600 font-semibold">
-              {{ training?.startDate | date }} –
-              {{ training?.endDate | date }}</span
+              {{ training?.startDate |  date:'dd/MM/yyyy'  }} –
+              {{ training?.endDate |  date:'dd/MM/yyyy'  }}</span
             >
           </div>
         </div>

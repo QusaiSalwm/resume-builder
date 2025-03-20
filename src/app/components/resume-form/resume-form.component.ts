@@ -18,6 +18,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { ImageCropperComponent } from 'ngx-image-cropper';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ResumeDialogComponent } from '../resume-dialog/resume-dialog.component';
+import {  MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { PdfService } from '../../services/pdf.service';
+import { DialogConfig } from '@angular/cdk/dialog';
+import { LanguageService } from '../../services/language.service';
+
 @Component({
   selector: 'app-resume-form',
   standalone: true,
@@ -33,6 +41,8 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatCheckboxModule,
     MatInputModule,
     MatDatepickerModule,
+    ImageCropperComponent,
+    MatSnackBarModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './resume-form.component.html',
@@ -42,8 +52,18 @@ export class ResumeFormComponent implements OnInit {
   form: FormGroup;
   profileImage: string | ArrayBuffer | null = null;
   resumeData: any;
+  showCropper: boolean = false;
+  imageChangedEvent: any = null;
+  currentLanguage:any
 
-  constructor(private fb: FormBuilder, private resumeService: ResumeService) {
+  constructor(
+    private fb: FormBuilder,
+    private resumeService: ResumeService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private pdfService: PdfService,
+    private languageService:LanguageService
+  ) {
     this.form = this.fb.group({
       profileImage: [''],
       firstName: [''],
@@ -60,6 +80,7 @@ export class ResumeFormComponent implements OnInit {
       experience: this.fb.array([]),
       training: this.fb.array([]),
       skills: this.fb.array([]),
+      languages: this.fb.array([]),
       hobbies: this.fb.array([]),
     });
 
@@ -84,18 +105,56 @@ export class ResumeFormComponent implements OnInit {
   ngOnInit(): void {
     this.loadFromLocalStorage();
     this.resumeData = this.resumeService.getResumeData();
+    this.languageService.currentLang$.subscribe((lang) => {
+      this.currentLanguage = lang
+    })
   }
 
-  onImageSelected(event: any) {
+  // onImageSelected(event: any) {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       this.profileImage = reader.result;
+  //       this.form.get('profileImage')?.setValue(reader.result); // Store in form control
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
+
+  onImageSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.profileImage = reader.result;
-        this.form.get('profileImage')?.setValue(reader.result); // Store in form control
-      };
-      reader.readAsDataURL(file);
+      this.imageChangedEvent = event; // Set the event for the cropper
+      this.showCropper = true; // Show the cropper modal
     }
+  }
+
+  // Convert Blob to Base64
+  convertBlobToBase64(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result as string); // Resolve with Base64 string
+      };
+      reader.onerror = reject; // Handle errors
+      reader.readAsDataURL(blob); // Convert Blob to Base64
+    });
+  }
+
+  imageCropped(event: any): void {
+    const blob = event.blob;
+    if (blob) {
+      this.convertBlobToBase64(blob).then((base64) => {
+        this.profileImage = base64;
+      });
+    }
+  }
+
+  // Save the cropped image and close the modal
+  saveCroppedImage(): void {
+    this.showCropper = false; // Hide the cropper modal
+    this.form.get('profileImage')?.setValue(this.profileImage); // Store in form control
   }
 
   get experienceControls() {
@@ -114,6 +173,10 @@ export class ResumeFormComponent implements OnInit {
     return this.form.get('skills') as FormArray;
   }
 
+  get languagesControls() {
+    return this.form.get('languages') as FormArray;
+  }
+
   // get hobbiesControls() {
   //   return this.form.get('hobbies') as FormArray;
   // }
@@ -124,7 +187,20 @@ export class ResumeFormComponent implements OnInit {
 
   addHobby(hobbyName: string) {
     const hobbiesArray = this.form.get('hobbies') as FormArray;
-    hobbiesArray.push(this.fb.control(hobbyName));
+
+    const isDuplicate = hobbiesArray.controls.some(
+      (control) => control.value === hobbyName
+    );
+
+    if (!isDuplicate) {
+      hobbiesArray.push(this.fb.control(hobbyName));
+    } else {
+      this.snackBar.open(`Hobby "${hobbyName}" already exists.`, 'Close', {
+        duration: 3000,
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+      });
+    }
   }
 
   removeHobby(index: number) {
@@ -142,9 +218,22 @@ export class ResumeFormComponent implements OnInit {
         careerLevel: [''],
         startDate: [''],
         endDate: [''],
+        stillInWork: false,
         tasks: this.fb.array([]),
       })
     );
+  }
+
+  onStillInWorkChange(index: number) {
+    const experienceGroup = this.experienceControls.at(index) as FormGroup;
+    const stillInWorkControl = experienceGroup.get('stillInWork');
+    const endDateControl = experienceGroup.get('endDate');
+
+    if (stillInWorkControl?.value) {
+      endDateControl?.disable();
+    } else {
+      endDateControl?.enable();
+    }
   }
 
   // Function to create a new task entry
@@ -191,6 +280,19 @@ export class ResumeFormComponent implements OnInit {
 
   removeSkill(index: number) {
     this.skillsControls.removeAt(index);
+  }
+
+  addLanguage() {
+    this.languagesControls.push(
+      this.fb.group({
+        language: [''],
+        level: [''],
+      })
+    );
+  }
+
+  removeLanguge(index: number) {
+    this.languagesControls.removeAt(index);
   }
 
   // addHobby() {
@@ -243,6 +345,7 @@ export class ResumeFormComponent implements OnInit {
                 careerLevel: exp.careerLevel || '',
                 startDate: exp.startDate || '',
                 endDate: exp.endDate || '',
+                stillInWork: exp.stillInWork || false,
                 tasks: this.fb.array([]),
               });
 
@@ -280,6 +383,18 @@ export class ResumeFormComponent implements OnInit {
               this.skillsControls.push(this.fb.control(skill));
             });
           }
+
+          if (jsonData.languages) {
+            this.languagesControls.clear();
+            jsonData.languages.forEach((lang: any) => {
+              this.languagesControls.push(
+                this.fb.group({
+                  language: lang.language || '', // Ensure this control exists
+                  level: lang.level || '', // Ensure this control exists
+                })
+              );
+            });
+          }
         } catch (error) {
           console.error('Invalid JSON file', error);
         }
@@ -315,6 +430,7 @@ export class ResumeFormComponent implements OnInit {
               careerLevel: exp.careerLevel || '',
               startDate: exp.startDate || '',
               endDate: exp.endDate || '',
+              stillInWork: exp.stillInWork || false,
               tasks: this.fb.array([]),
             });
 
@@ -338,18 +454,30 @@ export class ResumeFormComponent implements OnInit {
           });
         }
 
-         if (jsonData.email) {
-           // Instead of jsonData.education
-           this.emailControls.clear();
-           jsonData.email.forEach((edu: any) => {
-             this.emailControls.push(this.fb.control(edu));
-           });
-         }
+        if (jsonData.email) {
+          // Instead of jsonData.education
+          this.emailControls.clear();
+          jsonData.email.forEach((edu: any) => {
+            this.emailControls.push(this.fb.control(edu));
+          });
+        }
 
         if (jsonData.skills) {
           this.skillsControls.clear();
           jsonData.skills.forEach((skill: string) => {
             this.skillsControls.push(this.fb.control(skill));
+          });
+        }
+
+        if (jsonData.languages) {
+          this.languagesControls.clear();
+          jsonData.languages.forEach((lang: any) => {
+            this.languagesControls.push(
+              this.fb.group({
+                language: lang.language || '', // Ensure this control exists
+                level: lang.level || '', // Ensure this control exists
+              })
+            );
           });
         }
 
@@ -361,5 +489,26 @@ export class ResumeFormComponent implements OnInit {
         }
       }
     }
+  }
+
+  openPreviewDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    if (this.currentLanguage == 'ar') {
+    dialogConfig.direction = 'rtl';
+
+    }
+    else {
+    dialogConfig.direction = 'ltr';
+
+    }
+    dialogConfig.width = '90vw',
+    dialogConfig.height = '95vh'
+    this.dialog.open(ResumeDialogComponent, dialogConfig);
+  }
+
+  downloadPDF() {
+    // Trigger the download event
+    this.pdfService.triggerDownloadPdf();
   }
 }

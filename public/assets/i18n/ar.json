@@ -16,6 +16,7 @@
   "EMAIL": "البريد الإلكتروني",
   "EXPERIENCE": "الخبرة",
   "ADD_EXPERIEECE": "إضافة خبرة",
+  "REMOVE_EXPERIENCE": "إزالة الخبرة",
   "JOB_TITLE": "المسمى الوظيفي",
   "EMPLOYER": "جهة العمل",
   "INDUSTRY": "الصناعة",
@@ -45,5 +46,19 @@
   "ADD_HOPPY": "إضافة هواية",
   "REMOVE_HOPPY": "إزالة هواية",
   "CONTACT": "التواصل",
-  "ABOUT_ME": "عن نفسي"
+  "ABOUT_ME": "عن نفسي",
+  "CANCEL": "إلغاء",
+  "SAVE": "حفظ",
+  "NOW": "حتى الان",
+  "STILL_IN_WORK": "لا أزال في العمل",
+  "REMOVE": "إزالة",
+  "LANGUAGES": "اللغات",
+  "LANGUAGE": "لغة",
+  "ADD_LANGUAGE": "إضافة لغة",
+  "REMOVE_LANGUAGE": "إزالة لغة",
+  "LEVEL": "مستوى",
+  "IMPORT_JSON": "استيراد JSON",
+  "EXPORT_JSON": "تصدير JSON",
+  "PRINT": "طباعة",
+  "PREVIEW": "معاينة"
 }

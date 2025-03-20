@@ -1,3 +1,7 @@
 mat-icon{
   overflow: visible;
 }
+.overflow-wrap-break-word {
+  overflow-wrap: break-word; /* Breaks long words if necessary */
+  word-break: break-word; /* Ensures words break to prevent overflow */
+}

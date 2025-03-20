@@ -1,6 +1,4 @@
-<div
-  class="bg-white shadow-md p-8 border mt-8 border-black min-h-[calc(100vh-2rem)]"
->
+<div class="bg-white shadow-md p-8 border border-black w-[210mm] min-h-[297mm]">
   <!-- Header Section -->
   <div class="flex items-center gap-4 border-b pb-6 mb-2">
     <img
@@ -13,13 +11,13 @@
       <p class="text-3xl font-bold text-black">
         {{ resumeData.firstName }} {{ resumeData.lastName }}
       </p>
-      <div class="mt-2 space-y-1 text-gray-600">
+      <div class="mt-2 space-y-1 text-gray-600 ">
         <p
           class="flex justify-start items-start gap-2"
           *ngIf="resumeData?.address"
         >
           <mat-icon class="mr-[5px]">location_on</mat-icon>
-          <span class="break-words max-w-full overflow-hidden break-all">{{
+          <span class="break-words max-w-full  break-all">{{
             resumeData?.address
           }}</span>
           <br />
@@ -38,7 +36,7 @@
           *ngIf="resumeData?.country"
         >
           <mat-icon>home</mat-icon>
-          <span class="leading-relaxed break-words max-w-md overflow-hidden">{{
+          <span class="leading-relaxed break-words max-w-md">{{
             resumeData?.country
           }}</span>
         </p>
@@ -48,7 +46,7 @@
         >
           <mat-icon> phone</mat-icon>
 
-          <span class="leading-relaxed break-words max-w-md overflow-hidden">{{
+          <span class="leading-relaxed break-words max-w-md ">{{
             resumeData?.phone
           }}</span>
         </p>
@@ -59,7 +57,7 @@
           <mat-icon>date_range</mat-icon>
 
           <span class="whitespace-nowrap">{{
-            resumeData?.birthDate | date
+            resumeData?.birthDate |  date:'dd/MM/yyyy' 
           }}</span>
         </p>
       </div>
@@ -68,7 +66,7 @@
 
   <!-- Introduction -->
   <p
-    class="text-sm text-gray-600 mt-2 break-words max-w-md overflow-hidden items-center"
+    class="text-sm text-gray-600 mt-2 break-words max-w-md  items-center"
   >
     {{ resumeData.aboutMe }}
   </p>
@@ -100,7 +98,11 @@
         }"
       ></div>
       <p class="text-gray-600">
-        {{ job.startDate | date }} - {{ job.endDate | date }}
+        {{ job.startDate |  date:'dd/MM/yyyy'  }} -
+        <span *ngIf="!experience?.stillInWork">
+          {{ experience?.endDate |  date:'dd/MM/yyyy'  }}</span
+        >
+        <span *ngIf="experience?.stillInWork"> {{ "NOW" | translate }}</span>
       </p>
       <p class="font-bold">{{ job.jobTitle }}</p>
       <p class="text-gray-600">{{ job.employer }}</p>
@@ -138,7 +140,7 @@
         }"
       ></div>
       <p class="text-gray-600">
-        {{ edu.startDate | date }} - {{ edu.endDate | date }}
+        {{ edu.startDate |  date:'dd/MM/yyyy'  }} - {{ edu.endDate |  date:'dd/MM/yyyy'  }}
       </p>
       <p class="font-bold">{{ edu.specialization }}</p>
       <p class="text-gray-600">{{ edu.college }}</p>

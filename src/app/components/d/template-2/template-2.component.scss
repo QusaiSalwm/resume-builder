@@ -7,13 +7,27 @@ p{
 }
 
 .clippath{
-  width: 200px;
+  width: 400px;
   height: 200px;
-  position: absolute;
-  top: 0;
-  left: 0;
+  text-align: center;
+  word-break: break-all;
+  // clip-path: polygon(100% 0, 74% 100%, 0 55%, 0 0);
+
+}
+
+@media print {
+  .clippath{
+  width: 400px;
+  height: 200px;
+  text-align: center;
+  word-break: break-all;
   clip-path: polygon(100% 0, 74% 100%, 0 55%, 0 0);
-  background-color: red;
+
+}
+}
+.name{
+  margin-top: 45px;
+  margin-inline-start: 10px;
 }
 .filled-triangle {
     width: 400px;  /* Base width of the triangle */

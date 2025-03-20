@@ -1,1 +1,13 @@
-<app-template-1></app-template-1>
+   <!-- paginated-content.component.html -->
+   <div class="page-container">
+     <div class="page" *ngFor="let paragraph of pages[currentPage]">
+       <p>{{ paragraph }}</p>
+     </div>
+   </div>
+
+   <div class="pagination">
+     <button (click)="prevPage()" [disabled]="currentPage === 0">السابق</button>
+     <span>صفحة {{ currentPage + 1 }} من {{ pages.length }}</span>
+     <button (click)="nextPage()" [disabled]="currentPage === pages.length - 1">التالي</button>
+   </div>
+

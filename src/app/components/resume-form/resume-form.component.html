@@ -1,11 +1,14 @@
-<form [formGroup]="form" class="text-sm">
+<form [formGroup]="form" class="text-sm max-h-[80vh] overflow-auto">
   <div class="flex flex-col items-center mb-4">
+    <!-- Profile Image Preview -->
     <img
       *ngIf="profileImage || this.resumeData.source._value.profileImage"
       [src]="profileImage || this.resumeData.source._value.profileImage"
       class="w-24 h-24 rounded-full border shadow-md object-cover mb-2"
       alt="Profile Image"
     />
+
+    <!-- Hidden File Input -->
     <input
       type="file"
       hidden
@@ -13,10 +16,45 @@
       (change)="onImageSelected($event)"
       accept="image/*"
     />
+
+    <!-- Upload Button -->
     <button mat-raised-button color="primary" (click)="imageInput.click()">
       {{ "UPLOAD_PHOTO" | translate }}
     </button>
   </div>
+
+  <!-- Image Cropper Modal -->
+  <ng-container *ngIf="showCropper">
+    <div
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+      <div class="bg-white p-4 rounded-lg shadow-lg">
+        <!-- Image Cropper -->
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="1"
+          [resizeToWidth]="300"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+        ></image-cropper>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-end mt-4">
+          <button mat-button (click)="showCropper = false">
+            {{ "CANCEL" | translate }}
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="saveCroppedImage()"
+          >
+            {{ "SAVE" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 
   <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
     <mat-form-field class="w-full text-sm">
@@ -76,12 +114,20 @@
 
   <p class="text-lg font-semibold mt-4">{{ "EMAILS" | translate }}</p>
   <div formArrayName="email">
-    <div *ngFor="let email of emailControls.controls; let i = index">
+    <div
+      *ngFor="let email of emailControls.controls; let i = index"
+      class="mb-2"
+    >
       <mat-form-field class="w-full text-sm">
         <mat-label>{{ "ADD_EMAIL" | translate }}</mat-label>
         <input matInput type="email" [formControlName]="i" />
       </mat-form-field>
-      <button mat-button color="warn" class="text-lg" (click)="removeEmail(i)">
+      <button
+        mat-raised-button
+        color="warn"
+        class="text-lg"
+        (click)="removeEmail(i)"
+      >
         {{ "REMOVE_EMAIL" | translate }}
       </button>
     </div>
@@ -122,8 +168,6 @@
         <input matInput formControlName="diploma" />
       </mat-form-field>
 
-
-
       <mat-form-field class="w-full text-sm">
         <mat-label>{{ "START_DATE" | translate }}</mat-label>
         <input
@@ -153,7 +197,7 @@
       </mat-form-field>
 
       <button
-        mat-button
+        mat-raised-button
         color="warn"
         class="text-xs"
         (click)="removeEducation(i)"
@@ -193,78 +237,93 @@
         <input matInput formControlName="industry" />
       </mat-form-field>
 
-      <mat-form-field class="w-full text-sm">
-        <mat-label>{{ "FIELD_OF_ACTIVITY" | translate }}</mat-label>
-        <input matInput formControlName="fieldOfActivity" />
-      </mat-form-field>
+      <div class="gird grid-cols-1 gap-4 md:grid md:grid-cols-2">
+        <mat-form-field class="w-full text-sm">
+          <mat-label>{{ "FIELD_OF_ACTIVITY" | translate }}</mat-label>
+          <input matInput formControlName="fieldOfActivity" />
+        </mat-form-field>
 
-      <mat-form-field class="w-full text-sm">
-        <mat-label>{{ "CAREER_LEVEL" | translate }}</mat-label>
-        <input matInput formControlName="careerLevel" />
-      </mat-form-field>
+        <mat-form-field class="w-full text-sm">
+          <mat-label>{{ "CAREER_LEVEL" | translate }}</mat-label>
+          <input matInput formControlName="careerLevel" />
+        </mat-form-field>
+      </div>
 
-      <mat-form-field class="w-full text-sm">
-        <mat-label>{{ "START_DATE" | translate }}</mat-label>
-        <input
-          matInput
-          [matDatepicker]="datepickerForExperStartDate"
-          formControlName="startDate"
-        />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="datepickerForExperStartDate"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #datepickerForExperStartDate> </mat-datepicker>
-      </mat-form-field>
+      <div class="gird grid-cols-1 gap-4 md:grid md:grid-cols-2">
+        <mat-form-field class="w-full text-sm">
+          <mat-label>{{ "START_DATE" | translate }}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="datepickerForExperStartDate"
+            formControlName="startDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="datepickerForExperStartDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #datepickerForExperStartDate> </mat-datepicker>
+        </mat-form-field>
 
-      <mat-form-field class="w-full text-sm">
-        <mat-label>{{ "END_DATE" | translate }}</mat-label>
-        <input
-          matInput
-          [matDatepicker]="datepickerForExperEndDate"
-          formControlName="endDate"
-        />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="datepickerForExperEndDate"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #datepickerForExperEndDate> </mat-datepicker>
-      </mat-form-field>
+        <mat-form-field class="w-full text-sm">
+          <mat-label>{{ "END_DATE" | translate }}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="datepickerForExperEndDate"
+            formControlName="endDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="datepickerForExperEndDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #datepickerForExperEndDate> </mat-datepicker>
+        </mat-form-field>
+      </div>
 
-
+      <mat-checkbox
+        formControlName="stillInWork"
+        (change)="onStillInWorkChange(i)"
+      >
+        {{ "STILL_IN_WORK" | translate }}
+      </mat-checkbox>
 
       <!-- Tasks Section -->
       <p class="text-lg font-semibold mt-2">{{ "TASKS" | translate }}</p>
-      <div formArrayName="tasks" >
-        <div  *ngFor="let task of getTasksControls(i).controls; let j = index">
+      <div formArrayName="tasks">
+        <div
+          *ngFor="let task of getTasksControls(i).controls; let j = index"
+          class="mb-2 flex justify-center items-center gap-2"
+        >
           <mat-form-field class="w-full text-sm">
             <mat-label>{{ "TASK" | translate }}</mat-label>
             <input matInput [formControlName]="j" />
           </mat-form-field>
           <button
-            mat-button
+            mat-raised-button
             color="warn"
-            class="text-xs"
+            class="text-xs text-center"
             (click)="removeTask(i, j)"
           >
-            {{"REMOVE_TASK" | translate }}
+            <!-- <mat-icon class="">delete</mat-icon> -->
+            {{ "REMOVE" | translate }}
           </button>
         </div>
       </div>
 
-      <button
-        mat-raised-button
-        color="accent"
-        class="text-xs"
-        (click)="addTask(i)"
-      >
-        {{ "ADD_TASK" | translate }}
-      </button>
+      <div class="mt-4">
+        <button
+          mat-raised-button
+          color="accent"
+          class="text-xs block"
+          (click)="addTask(i)"
+        >
+          {{ "ADD_TASK" | translate }}
+        </button>
+      </div>
 
       <button
-        mat-button
+        mat-raised-button
         color="warn"
-        class="text-xs"
+        class="text-x mt-4 mb-4"
         (click)="removeExperience(i)"
       >
         {{ "REMOVE_EXPERIENCE" | translate }}
@@ -288,7 +347,12 @@
         <mat-label>{{ "ADD_SKILL" | translate }}</mat-label>
         <input matInput [formControlName]="i" />
       </mat-form-field>
-      <button mat-button color="warn" class="text-xs" (click)="removeSkill(i)">
+      <button
+        mat-raised-button
+        color="warn"
+        class="text-xs"
+        (click)="removeSkill(i)"
+      >
         {{ "REMOVE_SKILL" | translate }}
       </button>
     </div>
@@ -296,13 +360,54 @@
   <button
     mat-raised-button
     color="primary"
-    class="text-xs mb-5"
+    class="text-xs mb-5 mt-4"
     (click)="addSkill()"
   >
     {{ "ADD_SKILL" | translate }}
   </button>
+  <hr />
 
-  <p class="text-lg font-semibold mt-4">{{ "HOBBIES" | translate }}</p>
+  <p class="text-lg font-semibold mt-4 pt-4">{{ "LANGUAGES" | translate }}</p>
+  <div formArrayName="languages">
+    <div
+      *ngFor="let lang of languagesControls.controls; let i = index"
+      [formGroupName]="i"
+      class="mb-4 border-b pb-4"
+    >
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <mat-form-field class="w-full text-sm">
+          <mat-label>{{ "LANGUAGE" | translate }}</mat-label>
+          <input matInput formControlName="language" />
+        </mat-form-field>
+
+        <mat-form-field class="w-full text-sm">
+          <mat-label>{{ "LEVEL" | translate }}</mat-label>
+          <input matInput formControlName="level" />
+        </mat-form-field>
+      </div>
+
+      <button
+        mat-raised-button
+        color="warn"
+        class="text-xs"
+        (click)="removeLanguge(i)"
+      >
+        {{ "REMOVE_LANGUAGE" | translate }}
+      </button>
+    </div>
+  </div>
+  <button
+    mat-raised-button
+    color="primary"
+    class="text-xs mb-5"
+    (click)="addLanguage()"
+  >
+    {{ "ADD_LANGUAGE" | translate }}
+  </button>
+
+  <hr />
+
+  <p class="text-lg font-semibold pt-4">{{ "HOBBIES" | translate }}</p>
 
   <div class="grid grid-cols-3">
     <div
@@ -327,6 +432,7 @@
       <mat-icon class="text-[#223A5E] cursor-pointer">{{
         hobby.value
       }}</mat-icon>
+
       <!-- <span>{{ hobby.value }}</span> -->
       <mat-icon
         matSuffix
@@ -338,20 +444,29 @@
       </mat-icon>
     </div>
   </div>
-</form>
-<div class="mt-10 mb-5 flex gap-4">
-  <button mat-raised-button color="primary" (click)="exportJson()">
-    Export JSON
-  </button>
 
-  <input type="file" hidden #fileInput (change)="onFileSelected($event)" />
-  <button mat-raised-button color="accent" (click)="fileInput.click()">
-    Import JSON
-  </button>
+  <div class="mt-10 mb-5 flex gap-4">
+    <button mat-raised-button (click)="openPreviewDialog()" >
+      {{ "PREVIEW" | translate }}
+    </button>
 
-  <!-- <button mat-raised-button color="warn" (click)="loadFromLocalStorage()">
+    <button mat-raised-button color="primary" (click)="exportJson()">
+      {{ "EXPORT_JSON" | translate }}
+    </button>
+
+    <input type="file" accept="json" hidden #fileInput (change)="onFileSelected($event)" />
+    <button mat-raised-button color="accent" (click)="fileInput.click()">
+      {{ "IMPORT_JSON" | translate }}
+    </button>
+
+    <button mat-raised-button color="primary" (click)="downloadPDF()">
+      {{ "PRINT" | translate }}
+    </button>
+
+    <!-- <button mat-raised-button color="warn" (click)="loadFromLocalStorage()">
     Load from LocalStorage
   </button> -->
-</div>
+  </div>
+</form>
 
 <!-- <button (click)="printForm()">print form</button> -->

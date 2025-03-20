@@ -1,13 +1,50 @@
 mat-icon{
   margin-inline-end:5px;
-
-}
-mat-icon{
   overflow: visible;
 }
-.scale{
- transform: scale(0.3);
- transform-origin: left top;
+
+
+
+.content {
+  max-width: 100%;
+  max-height: 100%;
+  word-wrap: break-word;
+}
+.break-text {
+  word-break: break-word;
+  white-space: normal;
+}
+.container {
+  min-height: auto;
+}
+.text-container {
+  overflow-wrap: break-word;
 }
 
 
+.resume-content {
+  overflow-y: hidden;
+  height: 297mm; /* Fixed height */
+}
+
+.pagination-controls {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+
+.resume-page {
+  width: 210mm; /* A4 Width */
+  min-height: 297mm;
+  max-height: 297mm;
+  overflow: hidden;
+  page-break-after: always;
+  border: 1px solid #de2222;
+  padding: 20px;
+  margin-bottom: 20px;
+}

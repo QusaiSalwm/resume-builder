@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input, OnInit } from '@angular/core';
 import { ResumeService } from '../../../resume.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,10 +14,10 @@ import { ThemeService } from '../../../services/theme.service';
   styleUrl: './template-1.component.scss',
 })
 export class Template1Component implements OnInit {
-  selectedTheme: any;
-  customColor: string = '';
+ @Input() selectedTheme: any;
+ @Input() customColor: string = '';
   colorThemesNew: any = COLOR_THEMES_NEW;
-  currentLang :any
+  currentLang: any;
   arabicStyles = {
     'text-align': 'right',
     direction: 'rtl',
@@ -33,6 +33,8 @@ export class Template1Component implements OnInit {
   };
 
   resumeData: any = {};
+  pages: any[] = [];
+  maxPageHeight = 297;
 
   constructor(
     private resumeService: ResumeService,
@@ -49,9 +51,9 @@ export class Template1Component implements OnInit {
   }
 
   ngOnInit(): void {
-     if (typeof window !== 'undefined') {
-       this.currentLang = localStorage.getItem('lang');
-     }
+    if (typeof window !== 'undefined') {
+      this.currentLang = localStorage.getItem('lang');
+    }
   }
 
 
