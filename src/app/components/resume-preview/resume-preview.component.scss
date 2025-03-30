@@ -102,7 +102,7 @@
   min-height: 297mm;
   margin: 0 auto;
   overflow: hidden;
-  // margin-inline-start: 100px;
+  margin-inline-start: 40px;
   // transition-duration: 1s;
   // transition: all 0.3s ease;
 }
@@ -113,7 +113,7 @@
   min-height: 297mm;
   margin: 0 auto;
   overflow: hidden;
-  // margin-inline-start: 100px;
+  margin-inline-start: 40px;
   // transition-duration:1s ;
   // transition: all 0.3s ease;
 }
@@ -194,5 +194,13 @@
 
   .scale1{
     margin-inline-start: 0;
+  }
+}
+@media print{
+  *{
+    margin: 0;
+  }
+  @page{
+    size:a4
   }
 }

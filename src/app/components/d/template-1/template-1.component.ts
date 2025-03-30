@@ -55,6 +55,4 @@ export class Template1Component implements OnInit {
       this.currentLang = localStorage.getItem('lang');
     }
   }
-
-
 }

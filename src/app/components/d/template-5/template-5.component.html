@@ -1,8 +1,8 @@
 <div class="flex justify-center w-[210mm] min-h-[297mm]">
-  <div class="w- bg-white shadow-lg">
+  <div class="bg-white shadow-lg">
     <!-- Header Section -->
     <div
-      class="text-white text-center py-10 relative"
+      class="text-white text-center py-10 relative min-w-[210mm] max-w-[210mm]"
       [ngStyle]="{
         'background-color':
           selectedTheme === 'custom'
@@ -19,7 +19,7 @@
       />
     </div>
 
-    <div class="text-center mt-16 px-10">
+    <div class="text-center mt-16 px-10 min-h-[60px]">
       <p
         class="text-2xl font-semibold"
         *ngIf="resumeData.firstName || resumeData.lastName"
@@ -30,7 +30,9 @@
         class="text-sm text-gray-600 mt-2 break-words max-w-2xl items-center"
         *ngIf="resumeData.aboutMe"
       >
-        <span class="mt-4 text-sm px-2 text-center leading-relaxed break-words max-w-md">
+        <span
+          class="mt-4 text-sm px-2 text-center leading-relaxed break-words max-w-md"
+        >
           {{ resumeData?.aboutMe }}
         </span>
       </p>
@@ -40,7 +42,7 @@
     <div class="flex mt-8">
       <!-- Left Column -->
       <div
-        class="w-1/3 text-white px-6 py-8 min-h-[800px] "
+        class="w-1/3 text-white px-6 py-8 min-h-[244mm]"
         [ngStyle]="{
           'background-color':
             selectedTheme === 'custom'
@@ -61,7 +63,7 @@
         >
           {{ "CONTACT" | translate }}
         </p>
-        <div class="space-y-3 text-sm mb-10 overflow-hidden">
+        <div class="space-y-3 text-sm mt-3 mb-10 overflow-hidden">
           <p
             class="flex justify-start items-start gap-2 break-words"
             *ngIf="resumeData.address"
@@ -77,17 +79,16 @@
             *ngIf="resumeData.country"
           >
             <mat-icon>home</mat-icon>
-            <span
-              class="leading-relaxed break-words max-w-md"
-              >{{ resumeData.country }}</span
-            >
+            <span class="leading-relaxed break-words max-w-md">{{
+              resumeData.country
+            }}</span>
           </p>
           <p
             class="flex justify-start items-start gap-2"
             *ngIf="resumeData.phone"
           >
             <mat-icon>phone</mat-icon>
-            <span class="leading-relaxed break-words max-w-md ">
+            <span class="leading-relaxed break-words max-w-md">
               {{ resumeData.phone }}</span
             >
           </p>
@@ -97,7 +98,7 @@
               class="flex gap-2"
             >
               <mat-icon>email</mat-icon>
-              <p class="leading-relaxed break-words ">
+              <p class="leading-relaxed break-words">
                 {{ email }}
               </p>
               <span *ngIf="i !== resumeData.email.length - 1"></span>
@@ -109,21 +110,32 @@
             *ngIf="resumeData.birthDate"
           >
             <mat-icon>date_range</mat-icon>
-            <span
-              class="leading-relaxed break-words max-w-md "
-              >{{ resumeData.birthDate |  date:'dd/MM/yyyy'  }}</span
-            >
+            <span class="leading-relaxed break-words max-w-md">{{
+              resumeData.birthDate | date : "dd/MM/yyyy"
+            }}</span>
           </p>
         </div>
 
         <p
-          class="text-2xl font-semibold mt-10 mb-10"
+          class="text-xl font-semibold mt-10 mb-10"
           *ngIf="resumeData.skills && resumeData.skills.length > 0"
         >
           {{ "SKILLS" | translate }}
         </p>
-        <ul class="text-sm space-y-2">
+        <ul class="text-sm space-y-2 mb-5 mt-3">
           <li *ngFor="let skill of resumeData.skills">{{ skill }}</li>
+        </ul>
+
+        <p
+          class="text-xl font-semibold mt-20 mb-10"
+          *ngIf="resumeData.languages && resumeData.languages.length > 0"
+        >
+          {{ "LANGUAGES" | translate }}
+        </p>
+        <ul class="text-sm space-y-2 mt-3">
+          <li *ngFor="let language of resumeData.languages">
+            {{ language.language }} - {{ language.level }}
+          </li>
         </ul>
       </div>
 
@@ -151,9 +163,9 @@
             {{ experience?.industry }}, {{ experience?.fieldOfActivity }},
             {{ experience?.careerLevel }}
             <span class="font-semibold"
-              >{{ experience.startDate |  date:'dd/MM/yyyy'  }} -
+              >{{ experience.startDate | date : "dd/MM/yyyy" }} -
               <span *ngIf="!experience.stillInWork">
-                {{ experience?.endDate |  date:'dd/MM/yyyy'  }}</span
+                {{ experience?.endDate | date : "dd/MM/yyyy" }}</span
               >
               <span *ngIf="experience.stillInWork">
                 {{ "NOW" | translate }}</span
@@ -184,8 +196,8 @@
           <p class="text-sm text-gray-600" *ngIf="training.college">
             {{ training.college }}
             <span class="font-semibold"
-              >{{ training.startDate |  date:'dd/MM/yyyy'  }} -
-              {{ training.endDate |  date:'dd/MM/yyyy'  }}</span
+              >{{ training.startDate | date : "dd/MM/yyyy" }} -
+              {{ training.endDate | date : "dd/MM/yyyy" }}</span
             >
           </p>
         </div>

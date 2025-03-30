@@ -18,10 +18,7 @@ export class ThemeService {
     if (typeof window !== 'undefined' && localStorage.getItem('resumeTheme')) {
       return localStorage.getItem('resumeTheme')!;
     }
-    return {
-      head: '#76283D',
-      back: '#FFE4EB',
-    };
+    return 'kyBIKh';
   }
 
   private getStoredCustomColor(): string {

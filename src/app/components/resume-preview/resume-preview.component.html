@@ -41,6 +41,7 @@
         'mobile-scale': !isMobile,
         'mobile-scale-ar': !isMobile && currentLang === 'ar'
       }"
+      id="printableContent"
     >
       <app-template-1 [selectedTheme]="selectedTheme"  id="resumeContent"></app-template-1>
     </div>
@@ -52,6 +53,7 @@
         'transform-origin-left': currentLang !== 'ar'
       }"
       (click)="saveResumeTemplate()"
+      
     >
       <app-template-2 id="resumeContent"></app-template-2>
     </div>
@@ -63,6 +65,7 @@
         'transform-origin-left': currentLang !== 'ar'
       }"
       (click)="saveResumeTemplate()"
+
     >
       <app-template-3 id="resumeContent"></app-template-3>
     </div>
@@ -73,6 +76,7 @@
         'transform-origin-right': currentLang === 'ar',
         'transform-origin-left': currentLang !== 'ar'
       }"
+
     >
       <app-template-4 id="resumeContent"></app-template-4>
     </div>
@@ -84,6 +88,7 @@
         'transform-origin-left': currentLang !== 'ar'
       }"
       (click)="saveResumeTemplate()"
+      id="printableContent"
     >
       <app-template-5 id="resumeContent"></app-template-5>
     </div>
