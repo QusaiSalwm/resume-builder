@@ -1,8 +1,24 @@
-
-  <div class="m-2">
-<button (click)="close()" mat-raised-button color="warn" class="w-auto inline-block">X</button>
-
+<div [dir]="dir" class="m-2 w-[100%] ">
+  <button
+    (click)="close()"
+    mat-raised-button
+    color="warn"
+    class="w-auto inline-block ms-5"
+  >
+    X
+  </button>
 </div>
-<app-resume-preview  [currentLang]="currentLang" [overrideTransformOrigin]="currentLang === 'ar'"></app-resume-preview>
-<app-template-selector class="mt-[50px]"></app-template-selector>
+<div class=" flex flex-col md:flex-row h-[calc(100vh)]">
+  <!-- Fixed Preview Section (left side) -->
+  <div class="w-full  overflow-hidden md:w-3/4 p-6 sticky top-0 md:h-screen md:overflow-y-hidden">
+    <app-resume-preview
+      [currentLang]="currentLang"
+      [overrideTransformOrigin]="currentLang === 'ar'"
+    ></app-resume-preview>
+  </div>
 
+  <!-- Scrollable Template Selector Section (right side) -->
+  <div class="w-full md:w-1/4 p-6 overflow-y-auto h-[90%]">
+    <app-template-selector class="flex flex-col"></app-template-selector>
+  </div>
+</div>

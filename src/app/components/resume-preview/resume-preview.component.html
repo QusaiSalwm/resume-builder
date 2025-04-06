@@ -1,5 +1,5 @@
-<div class="border-black max-h-840px bg-[#E6E6E6]" id="cont">
-  <div class="flex items-center justify-between ">
+<div class="border-black max-h-840px md:bg-[#E6E6E6]" id="cont">
+  <div class="flex items-center justify-between">
     <app-color-switcher></app-color-switcher>
 
     <!-- <button mat-raised-button color="primary" (click)="openPreviewDialog()" >
@@ -8,14 +8,13 @@
   </div>
 
   <div
-
     id="scale1"
     [ngClass]="{
       'scale-right': currentLang === 'ar',
       'scale-left': currentLang !== 'ar'
     }"
-     [style.transform-origin]="getTransformOrigin()"
-     class="m-4 md:m-0"
+    [style.transform-origin]="getTransformOrigin()"
+    class="m-4 md:m-0"
   >
     <div id="resumeContent" *ngIf="resumeData.template === 'modern'">
       <app-template-modern></app-template-modern>
@@ -30,7 +29,6 @@
     </div>
 
     <div
-
       *ngIf="resumeData.template === 'template-1' && currentLang"
       [ngClass]="{
         'transform-origin-right': currentLang === 'ar',
@@ -43,7 +41,10 @@
       }"
       id="printableContent"
     >
-      <app-template-1 [selectedTheme]="selectedTheme"  id="resumeContent"></app-template-1>
+      <app-template-1
+        [selectedTheme]="selectedTheme"
+        id="resumeContent"
+      ></app-template-1>
     </div>
 
     <div
@@ -53,7 +54,6 @@
         'transform-origin-left': currentLang !== 'ar'
       }"
       (click)="saveResumeTemplate()"
-      
     >
       <app-template-2 id="resumeContent"></app-template-2>
     </div>
@@ -65,7 +65,6 @@
         'transform-origin-left': currentLang !== 'ar'
       }"
       (click)="saveResumeTemplate()"
-
     >
       <app-template-3 id="resumeContent"></app-template-3>
     </div>
@@ -76,7 +75,6 @@
         'transform-origin-right': currentLang === 'ar',
         'transform-origin-left': currentLang !== 'ar'
       }"
-
     >
       <app-template-4 id="resumeContent"></app-template-4>
     </div>

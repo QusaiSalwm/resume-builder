@@ -1,32 +1,79 @@
-<div class="grid grid-cols-2 justify-items-center px-3 md:grid-cols-4 gap-4 -mt-[700px]">
-  <img
-    src="images/templates-demo/template-1.jpg"
-    (click)="selectTemplate('template-1')"
-    alt=""
-    class="w-[100px] md:w-full cursor-pointer rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl"
-  />
-  <img
-    src="images/templates-demo/template-2.jpg"
-    (click)="selectTemplate('template-2')"
-    alt=""
-    class="w-[100px] md:w-full cursor-pointer rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl"
-  />
-  <img
-    src="images/templates-demo/template-3.jpg"
-    (click)="selectTemplate('template-3')"
-    alt=""
-    class="w-[100px] md:w-full cursor-pointer rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl"
-  />
-   <img
-    src="images/templates-demo/template-4.jpg"
-    (click)="selectTemplate('template-4')"
-    alt=""
-    class="w-[100px] md:w-full cursor-pointer rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl"
-  />
-  <img
-    src="images/templates-demo/template-5.jpg"
-    (click)="selectTemplate('template-5')"
-    alt=""
-    class="w-[100px] md:w-full cursor-pointer rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl"
-  />
+<div class="relative w-full">
+  <!-- Scroll Container -->
+  <div
+    #scrollContainer
+    class="flex flex-row overflow-x-auto snap-x snap-mandatory items-center gap-4 px-6 h-full md:flex-col scroll-smooth no-scrollbar"
+  >
+    <!-- Template Items -->
+    <div
+      class="min-w-[150px] snap-start cursor-pointer"
+      (click)="selectTemplate('template-1')"
+    >
+      <img
+        src="images/templates-demo/template-1.jpg"
+        alt="Template 1"
+        class="w-[150px] md:w-[200px] rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+      />
+    </div>
+
+    <div
+      class="min-w-[150px] snap-start cursor-pointer"
+      (click)="selectTemplate('template-2')"
+    >
+      <img
+        src="images/templates-demo/template-2.jpg"
+        alt="Template 2"
+        class="w-[150px] md:w-[200px] rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+      />
+    </div>
+
+    <div
+      class="min-w-[150px] snap-start cursor-pointer"
+      (click)="selectTemplate('template-3')"
+    >
+      <img
+        src="images/templates-demo/template-3.jpg"
+        alt="Template 3"
+        class="w-[150px] md:w-[200px] rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+      />
+    </div>
+
+    <div
+      class="min-w-[150px] snap-start cursor-pointer"
+      (click)="selectTemplate('template-4')"
+    >
+      <img
+        src="images/templates-demo/template-4.jpg"
+        alt="Template 4"
+        class="w-[150px] md:w-[200px] rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+      />
+    </div>
+
+    <div
+      class="min-w-[150px] snap-start cursor-pointer"
+      (click)="selectTemplate('template-5')"
+    >
+      <img
+        src="images/templates-demo/template-5.jpg"
+        alt="Template 5"
+        class="w-[150px] md:w-[200px] rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+      />
+    </div>
+  </div>
+
+  <!-- Left Arrow -->
+  <button
+    (click)="scrollLeft()"
+    class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700 md:hidden"
+  >
+    <mat-icon class="mt-1">arrow_back</mat-icon>
+  </button>
+
+  <!-- Right Arrow -->
+  <button
+    (click)="scrollRight()"
+    class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700 md:hidden"
+  >
+    <mat-icon class="mt-1">arrow_forward</mat-icon>
+  </button>
 </div>

@@ -1,6 +1,6 @@
 <div class="">
   <div
-    class="bg-white flex flex-col justify-center max-w-[210mm] min-h-[297mm] max-h-[297mm] relative resume-contnet"
+    class="bg-white flex flex-col justify-center max-w-[210mm] min-h-[297mm] max-h-[297mm] overflow-y-auto relative resume-contnet"
     #resumeContent
   >
     <!-- Header Section (Name & Image) -->
@@ -142,14 +142,13 @@
               <mat-icon>date_range</mat-icon>
 
               <span class="whitespace-nowrap">{{
-                resumeData?.birthDate | date : "dd/MM/yyyy"
+                resumeData?.birthDate | date : "dd.MM.yyyy"
               }}</span>
               ,
               <br />
-              <span
-                class="leading-relaxed break-words max-w-md "
-                >{{ resumeData?.placeOfBirth }}</span
-              >
+              <span class="leading-relaxed break-words max-w-md">{{
+                resumeData?.placeOfBirth
+              }}</span>
             </li>
           </ul>
         </div>
@@ -252,11 +251,11 @@
           >
             <p class="font-semibold">{{ training?.college }}</p>
             <p class="text-sm text-gray-600">
-              {{ training?.startDate | date : "dd/MM/yyyy" }} –
-              {{ training?.endDate | date : "dd/MM/yyyy" }}
+              {{ training?.startDate | date : "yyyy" }} –
+              {{ training?.endDate | date : "yyyy" }}
             </p>
-            <p class="font-semibold">{{ training?.diploma }}</p>
-            <p class="font-semibold">{{ training?.specialization }}</p>
+            <p class="font-normal">{{ training?.diploma }}</p>
+            <p class="font-normal">{{ training?.specialization }}</p>
           </div>
         </div>
 
@@ -282,10 +281,10 @@
           >
             <p class="font-semibold">{{ experience?.employer }}</p>
             <p class="text-sm text-gray-600">
-              {{ experience?.startDate | date : "dd/MM/yyyy" }}
+              {{ experience?.startDate | date : "MM.yyyy" }}
               <span *ngIf="experience?.startDate">-</span>
               <span *ngIf="!experience?.stillInWork">
-                {{ experience?.endDate | date : "dd/MM/yyyy" }}</span
+                {{ experience?.endDate | date : "MM.yyyy" }}</span
               >
               <span *ngIf="experience?.stillInWork">
                 {{ "NOW" | translate }}</span

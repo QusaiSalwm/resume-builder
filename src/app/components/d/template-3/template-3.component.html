@@ -70,8 +70,8 @@
               {{ training?.specialization }}, {{ training?.diploma }}
             </p>
             <span class="text-sm text-gray-600 font-normal">
-              {{ training?.startDate |  date:'dd/MM/yyyy'  }} –
-              {{ training?.endDate |  date:'dd/MM/yyyy'  }}</span
+              {{ training?.startDate |  date:'MM.yyyy'  }} –
+              {{ training?.endDate |  date:'MM.yyyy'  }}</span
             >
             <p class="text-gray-600 flex justify-between">
               {{ training?.college }}
@@ -157,7 +157,7 @@
             <mat-icon>date_range</mat-icon>
 
             <span class="whitespace-nowrap">{{
-              resumeData?.birthDate |  date:'dd/MM/yyyy'
+              resumeData?.birthDate |  date:'dd.MM.yyyy'
             }}</span>
             ,
             <span
@@ -185,10 +185,10 @@
             {{ experience?.jobTitle }}
             <span class="text-gray-500 text-xs"
               ><p class="text-sm text-gray-600">
-                {{ experience?.startDate |  date:'dd/MM/yyyy'  }}
+                {{ experience?.startDate |  date:'MM.yyyy'  }}
                 <span *ngIf="experience?.startDate">-</span>
                 <span *ngIf="!experience.stillInWork">
-                  {{ experience?.endDate |  date:'dd/MM/yyyy'  }}</span
+                  {{ experience?.endDate |  date:'MM.yyyy'  }}</span
                 >
                 <span *ngIf="experience.stillInWork">
                   {{ "NOW" | translate }}</span

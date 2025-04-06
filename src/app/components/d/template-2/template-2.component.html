@@ -129,7 +129,7 @@
               <mat-icon>date_range</mat-icon>
 
               <span class="whitespace-nowrap">{{
-                resumeData?.birthDate |  date:'dd/MM/yyyy'
+                resumeData?.birthDate |  date:'dd.MM.yyyy'
               }}</span>
               ,
               <br />
@@ -190,13 +190,13 @@
 
           <div *ngFor="let experience of resumeData?.experience" class="py-4">
             <p class="font-semibold flex justify-between">
-              {{ experience?.jobTitle }}
+              {{ experience?.employer }}
               <span class="text-gray-500 text-xs"
                 ><p class="text-sm text-gray-600">
-                  {{ experience?.startDate |  date:'dd/MM/yyyy'  }}
+                  {{ experience?.startDate |  date:'MM.yyyy'  }}
                   <span *ngIf="experience?.startDate">-</span>
                   <span *ngIf="!experience.stillInWork">
-                    {{ experience?.endDate |  date:'dd/MM/yyyy'  }}</span
+                    {{ experience?.endDate |  date:'MM.yyyy'  }}</span
                   >
                   <span *ngIf="experience.stillInWork">
                     {{ "NOW" | translate }}</span
@@ -204,11 +204,13 @@
                 </p></span
               >
             </p>
-            <p class="text-gray-700">{{ experience?.employer }}</p>
-            <p class="text-gray-700">
+            <p class="text-gray-700">{{ experience?.jobTitle }}</p>
+
+
+            <!-- <p class="text-gray-700">
               {{ experience?.industry }}, {{ experience?.fieldOfActivity }},
               {{ experience?.careerLevel }}
-            </p>
+            </p> -->
 
             <ul
               class="list-disc list-inside text-gray-600"
@@ -244,20 +246,24 @@
           </div> -->
 
           <div
-            class="mt-4 flex justify-between items-center"
+            class="mt-4 flex justify-between items-start"
             *ngFor="let training of resumeData?.training"
           >
             <div>
-              <p class="font-semibold">
-                {{ training?.specialization }}, {{ training?.diploma }}
-              </p>
-              <p class="text-gray-600 flex justify-between">
+               <p class="text-gray-600 flex justify-between font-semibold">
                 {{ training?.college }}
               </p>
+              <p class="font-normal">
+                {{ training?.specialization }}
+              </p>
+              <p class="font-normal">
+                 {{ training?.diploma }}
+              </p>
+
             </div>
             <span class="text-sm text-gray-600 font-semibold">
-              {{ training?.startDate |  date:'dd/MM/yyyy'  }} –
-              {{ training?.endDate |  date:'dd/MM/yyyy'  }}</span
+              {{ training?.startDate |  date:'MM.yyyy'  }} –
+              {{ training?.endDate |  date:'MM.yyyy'  }}</span
             >
           </div>
         </div>

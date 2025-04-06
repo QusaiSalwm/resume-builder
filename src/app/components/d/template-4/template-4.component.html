@@ -1,4 +1,4 @@
-<div class="bg-white shadow-md p-8 border border-black w-[210mm] min-h-[297mm]">
+<div class="bg-white shadow-md p-8 border border-black min-w-[210mm] min-h-[297mm]">
   <!-- Header Section -->
   <div class="flex items-center gap-4 border-b pb-6 mb-2">
     <img
@@ -57,7 +57,7 @@
           <mat-icon>date_range</mat-icon>
 
           <span class="whitespace-nowrap">{{
-            resumeData?.birthDate |  date:'dd/MM/yyyy'
+            resumeData?.birthDate |  date:'dd.MM.yyyy'
           }}</span>
         </p>
       </div>
@@ -98,9 +98,9 @@
         }"
       ></div>
       <p class="text-gray-600">
-        {{ job.startDate |  date:'dd/MM/yyyy'  }} -
+        {{ job.startDate |  date:'MM.yyyy'  }} -
         <span *ngIf="!experience?.stillInWork">
-          {{ experience?.endDate |  date:'dd/MM/yyyy'  }}</span
+          {{ experience?.endDate |  date:'MM.yyyy'  }}</span
         >
         <span *ngIf="experience?.stillInWork"> {{ "NOW" | translate }}</span>
       </p>
@@ -140,7 +140,7 @@
         }"
       ></div>
       <p class="text-gray-600">
-        {{ edu.startDate |  date:'dd/MM/yyyy'  }} - {{ edu.endDate |  date:'dd/MM/yyyy'  }}
+        {{ edu.startDate |  date:'yyyy'  }} - {{ edu.endDate |  date:'yyyy'  }}
       </p>
       <p class="font-bold">{{ edu.specialization }}</p>
       <p class="text-gray-600">{{ edu.college }}</p>

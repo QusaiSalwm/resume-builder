@@ -1,8 +1,14 @@
 import { Component, Inject, Input, OnInit, Renderer2 } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ResumeService } from '../../resume.service';
-import { ResumePreviewComponent } from "../resume-preview/resume-preview.component";
-import { TemplateSelectorComponent } from "../template-selector/template-selector.component";
+import { ResumePreviewComponent } from '../resume-preview/resume-preview.component';
+import { TemplateSelectorComponent } from '../template-selector/template-selector.component';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,12 +16,19 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-resume-dialog',
   standalone: true,
-  imports: [ResumePreviewComponent, TemplateSelectorComponent, CommonModule,MatButtonModule],
+  imports: [
+    ResumePreviewComponent,
+    TemplateSelectorComponent,
+    CommonModule,
+    MatButtonModule,
+  ],
   templateUrl: './resume-dialog.component.html',
   styleUrl: './resume-dialog.component.scss',
 })
 export class ResumeDialogComponent implements OnInit {
   isInDialog = false;
+  lang: any = '';
+  dir: any;
   // currentLang: any;
   @Input() currentLang: string = 'en'; // Default language
   @Input() overrideTransformOrigin: boolean = false;
@@ -26,7 +39,15 @@ export class ResumeDialogComponent implements OnInit {
     private resumeService: ResumeService,
     private renderer: Renderer2,
     private languageService: LanguageService
-  ) {}
+  ) {
+    this.lang = localStorage.getItem('lang');
+    // alert(this.lang);
+    if (this.lang && this.lang == 'ar') {
+      this.dir = 'ltr';
+    } else {
+      this.dir = 'rtl';
+    }
+  }
 
   selectTemplate(template: string) {
     this.resumeService.updateResumeData({ template });
@@ -34,7 +55,7 @@ export class ResumeDialogComponent implements OnInit {
   }
 
   close() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
   ngOnInit(): void {
@@ -45,7 +66,7 @@ export class ResumeDialogComponent implements OnInit {
       this.languageService.currentLang$.subscribe((lang) => {
         this.currentLang = lang;
         // this.changeDetectorRef.detectChanges();
-        document.documentElement.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+        // document.documentElement.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
       });
     }
   }

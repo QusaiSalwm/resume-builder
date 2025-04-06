@@ -21,7 +21,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { ImageCropperComponent } from 'ngx-image-cropper';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ResumeDialogComponent } from '../resume-dialog/resume-dialog.component';
-import {  MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { PdfService } from '../../services/pdf.service';
 import { DialogConfig } from '@angular/cdk/dialog';
 import { LanguageService } from '../../services/language.service';
@@ -54,7 +54,7 @@ export class ResumeFormComponent implements OnInit {
   resumeData: any;
   showCropper: boolean = false;
   imageChangedEvent: any = null;
-  currentLanguage:any
+  currentLanguage: any;
 
   constructor(
     private fb: FormBuilder,
@@ -62,7 +62,7 @@ export class ResumeFormComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private pdfService: PdfService,
-    private languageService:LanguageService
+    private languageService: LanguageService
   ) {
     this.form = this.fb.group({
       profileImage: [''],
@@ -106,8 +106,8 @@ export class ResumeFormComponent implements OnInit {
     this.loadFromLocalStorage();
     this.resumeData = this.resumeService.getResumeData();
     this.languageService.currentLang$.subscribe((lang) => {
-      this.currentLanguage = lang
-    })
+      this.currentLanguage = lang;
+    });
   }
 
   // onImageSelected(event: any) {
@@ -492,19 +492,34 @@ export class ResumeFormComponent implements OnInit {
   }
 
   openPreviewDialog() {
-    const dialogConfig = new MatDialogConfig();
+    let lang = localStorage.getItem('lang');
+    let dir = lang == 'ar' ? 'rtl' : 'ltr';
 
-    if (this.currentLanguage == 'ar') {
-    dialogConfig.direction = 'rtl';
+    const dialogConf = new MatDialogConfig();
+    dialogConf.width = '700px';
+    dialogConf.disableClose = true;
+    dialogConf.autoFocus = false;
 
+
+    if (lang === 'ar') {
+      dialogConf.direction = 'rtl';
+    } else {
+      dialogConf.direction = 'ltr';
     }
-    else {
-    dialogConfig.direction = 'ltr';
+    dialogConf.minWidth = '99%';
+    dialogConf.minHeight = '85%';
 
-    }
-    dialogConfig.width = '90vw',
-    dialogConfig.height = '95vh'
-    this.dialog.open(ResumeDialogComponent, dialogConfig);
+    dialogConf.enterAnimationDuration = '700ms';
+
+    const dialogRef = this.dialog.open(ResumeDialogComponent, dialogConf);
+
+    // // Wait for the dialog to close and get the result
+    // const result = await dialogRef.afterClosed().toPromise();
+
+    // if (result === 'refresh') {
+    //   await this.getCompanies();
+    //   await this.updateModels(company_id);
+    // }
   }
 
   downloadPDF() {
