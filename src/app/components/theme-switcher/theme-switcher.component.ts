@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-theme-switcher',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule,CommonModule],
   templateUrl: './theme-switcher.component.html',
   styleUrl: './theme-switcher.component.scss',
 })
