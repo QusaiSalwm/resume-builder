@@ -243,9 +243,21 @@
           <input matInput formControlName="fieldOfActivity" />
         </mat-form-field>
 
-        <mat-form-field class="w-full text-sm">
+        <!-- <mat-form-field class="w-full text-sm">
           <mat-label>{{ "CAREER_LEVEL" | translate }}</mat-label>
           <input matInput formControlName="careerLevel" />
+        </mat-form-field> -->
+
+        <mat-form-field class="w-full text-sm">
+          <mat-label>{{ "CAREER_LEVEL" | translate }}</mat-label>
+          <mat-select formControlName="careerLevel">
+            <mat-option
+              *ngFor="let level of careerLevels"
+              [value]="level.label"
+            >
+              {{ level.label | translate }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
 
@@ -409,7 +421,7 @@
 
   <p class="text-lg font-semibold pt-4">{{ "HOBBIES" | translate }}</p>
 
-  <div class="grid grid-cols-3">
+  <div class="grid grid-cols-8">
     <div
       *ngFor="let hobby of hobbiesList"
       class="hobby-icon"
@@ -446,7 +458,7 @@
   </div>
 
   <div class="mt-10 mb-5 flex gap-4">
-    <button mat-raised-button (click)="openPreviewDialog()" >
+    <button mat-raised-button (click)="openPreviewDialog()">
       {{ "PREVIEW" | translate }}
     </button>
 
@@ -454,7 +466,13 @@
       {{ "EXPORT_JSON" | translate }}
     </button>
 
-    <input type="file" accept="json" hidden #fileInput (change)="onFileSelected($event)" />
+    <input
+      type="file"
+      accept="json"
+      hidden
+      #fileInput
+      (change)="onFileSelected($event)"
+    />
     <button mat-raised-button color="accent" (click)="fileInput.click()">
       {{ "IMPORT_JSON" | translate }}
     </button>
@@ -466,6 +484,84 @@
     <!-- <button mat-raised-button color="warn" (click)="loadFromLocalStorage()">
     Load from LocalStorage
   </button> -->
+  </div>
+
+  <div class=" flex items-center justify-between px-8">
+    <!-- Left Side -->
+    <div class="flex items-center space-x-4">
+      <img
+        src="images/issam-logo.jpg"
+        alt="Profile"
+        class="w-[88px] h-[88px] rounded-full object-cover"
+      />
+      <div>
+        <p class="text-[20px] font-bold text-black">alayoubi_issam</p>
+        <p class="text-[18px] font-bold text-black mt-1">
+          M. Sc. Issam Alayoubi
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Side -->
+    <div class="space-y-2">
+      <a
+        href="https://www.instagram.com/alayoubi_issam"
+        target="_blank"
+        class="flex items-center space-x-3 hover:underline"
+      >
+        <i class="fab fa-instagram text-[#dd2a7b] text-[18px]"></i>
+        <span class="text-[16px] text-[#1d1d1d] tracking-widest"
+          >ISSAM ALAYOUBI</span
+        >
+      </a>
+      <a
+        href="https://wa.me/4915678415499"
+        target="_blank"
+        class="flex items-center space-x-3 hover:underline"
+      >
+        <i class="fab fa-whatsapp text-[#25D366] text-[18px]"></i>
+
+        <span class="text-[16px] text-[#1d1d1d] tracking-widest"
+          >+49 15678 415499</span
+        >
+      </a>
+      <a
+        href="mailto:ISSAM.IAS.IAS@GMAIL.COM"
+        class="flex items-center space-x-3 hover:underline"
+      >
+        <span class="material-icons text-[#1da1f2] text-[18px]">mail</span>
+        <span class="text-[16px] text-[#1d1d1d] tracking-widest"
+          >ISSAM.IAS.IAS&#64;GMAIL.COM</span
+        >
+      </a>
+      <a
+        href="https://www.facebook.com/alayoubi.issam"
+        target="_blank"
+        class="flex items-center space-x-3 hover:underline"
+      >
+        <i class="fas fa-envelope text-[#1da1f2] text-[18px]"></i>
+
+        <span class="text-[16px] text-[#1d1d1d] tracking-widest">Facebok</span>
+      </a>
+      <a
+        href="https://www.tiktok.com/@issamalayoubi"
+        target="_blank"
+        class="flex items-center space-x-3 hover:underline"
+      >
+        <i class="fas fab fa-tiktok text-[18px]"></i>
+
+        <span class="text-[16px] text-[#1d1d1d] tracking-widest">TikTok</span>
+      </a>
+      <a
+        href="https://t.me/issam_alayoubi"
+        target="_blank"
+        class="flex items-center space-x-3 hover:underline"
+      >
+        <i class="fab fa-telegram text-[#0088cc] text-[18px]"></i>
+
+        <span class="text-[16px] text-[#1d1d1d] tracking-widest">Telegram</span>
+      </a>
+    </div>
   </div>
 </form>
 

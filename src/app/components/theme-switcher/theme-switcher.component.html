@@ -1,3 +1,6 @@
- <button mat-button (click)="toggleTheme()">
+ <button mat-button (click)="toggleTheme()" class="" *ngIf="false">
+  <p class="text-white">
       {{ currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode' }}
+
+  </p>
     </button>

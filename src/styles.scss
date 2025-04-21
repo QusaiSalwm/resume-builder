@@ -25,7 +25,10 @@ body {
 }
 body,
 html {
-  background-color: var(--background-color);
+  background-image: url("/images/paper-back.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
   max-height: 100vh;
@@ -106,7 +109,6 @@ html:dir(rtl) * {
   font-weight: 900;
   font-style: normal;
 }
-
 
 .full-screen-dialog .mat-dialog-container {
   width: 100vw;

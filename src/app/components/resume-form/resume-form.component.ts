@@ -25,6 +25,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { PdfService } from '../../services/pdf.service';
 import { DialogConfig } from '@angular/cdk/dialog';
 import { LanguageService } from '../../services/language.service';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-resume-form',
@@ -43,6 +44,7 @@ import { LanguageService } from '../../services/language.service';
     MatDatepickerModule,
     ImageCropperComponent,
     MatSnackBarModule,
+    MatSelectModule
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './resume-form.component.html',
@@ -96,6 +98,31 @@ export class ResumeFormComponent implements OnInit {
     { name: 'Cooking', icon: 'restaurant' },
     { name: 'Gaming', icon: 'videogame_asset' },
     { name: 'Music', icon: 'music_note' },
+    { name: 'Reading', icon: 'menu_book' },
+    { name: 'Writing', icon: 'edit_note' },
+    { name: 'Traveling', icon: 'flight_takeoff' },
+    { name: 'Photography', icon: 'photo_camera' },
+    { name: 'Exercising', icon: 'fitness_center' },
+    { name: 'Volunteering', icon: 'volunteer_activism' },
+    { name: 'Programming', icon: 'code' },
+    { name: 'Music', icon: 'music_note' },
+    { name: 'Movies', icon: 'movie' },
+    { name: 'Video Games', icon: 'sports_esports' },
+    { name: 'Cooking', icon: 'restaurant_menu' },
+    { name: 'Drawing', icon: 'brush' },
+    { name: 'Self-Learning', icon: 'school' },
+  ];
+
+  careerLevels = [
+    { value: 'student', label: 'Student / Intern' },
+    { value: 'entry_level', label: 'Entry-Level Professional' },
+    { value: 'experienced', label: 'Experienced Professional' },
+    {
+      value: 'manager',
+      label: 'Manager (with or without personnel responsibility)',
+    },
+    { value: 'director', label: 'Director (Department Head, VP, SVP etc.)' },
+    { value: 'executive', label: 'Executive (CEO, GF etc.)' },
   ];
 
   printForm() {
@@ -499,7 +526,6 @@ export class ResumeFormComponent implements OnInit {
     dialogConf.width = '700px';
     dialogConf.disableClose = true;
     dialogConf.autoFocus = false;
-
 
     if (lang === 'ar') {
       dialogConf.direction = 'rtl';
