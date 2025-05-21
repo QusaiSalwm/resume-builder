@@ -70,7 +70,7 @@
           >
             <mat-icon>location_on</mat-icon>
             <span class="leading-relaxed break-words max-w-md"
-              >{{ resumeData.address }}, {{ resumeData.city }}
+              >{{ resumeData.address }} <span *ngIf="resumeData.address">, </span> {{ resumeData.city }}
               {{ resumeData.zipCode }}</span
             >
           </p>
@@ -134,7 +134,7 @@
         </p>
         <ul class="text-sm space-y-2 mt-3">
           <li *ngFor="let language of resumeData.languages">
-            {{ language.language }} - {{ language.level }}
+            {{ language.language }} <span *ngIf="language.language ">-</span>  {{ language.level }}
           </li>
         </ul>
       </div>
@@ -163,7 +163,7 @@
             {{ experience?.industry }}, {{ experience?.fieldOfActivity }},
             {{ experience?.careerLevel }}
             <span class="font-semibold"
-              >{{ experience.startDate | date : "dd/MM/yyyy" }} -
+              >{{ experience.startDate | date : "dd/MM/yyyy" }} <span *ngIf="experience.startDate">-</span>
               <span *ngIf="!experience.stillInWork">
                 {{ experience?.endDate | date : "dd/MM/yyyy" }}</span
               >
@@ -191,12 +191,12 @@
             class="font-semibold"
             *ngIf="training?.specialization || training?.diploma"
           >
-            {{ training?.specialization }}, {{ training?.diploma }}
+            {{ training?.specialization }} <span *ngIf="training?.specialization">, </span> {{ training?.diploma }}
           </p>
           <p class="text-sm text-gray-600" *ngIf="training.college">
             {{ training.college }}
             <span class="font-semibold"
-              >{{ training.startDate | date : "dd/MM/yyyy" }} -
+              >{{ training.startDate | date : "dd/MM/yyyy" }} <span *ngIf="training.startDate">-</span>
               {{ training.endDate | date : "dd/MM/yyyy" }}</span
             >
           </p>

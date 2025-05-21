@@ -67,10 +67,10 @@
         >
           <div>
             <p class="font-semibold text-black">
-              {{ training?.specialization }}, {{ training?.diploma }}
+              {{ training?.specialization }} <span *ngIf="training?.specialization">-</span> {{ training?.diploma }}
             </p>
             <span class="text-sm text-gray-600 font-normal">
-              {{ training?.startDate |  date:'MM.yyyy'  }} –
+              {{ training?.startDate |  date:'MM.yyyy'  }} <span *ngIf="training?.startDate">-</span>
               {{ training?.endDate |  date:'MM.yyyy'  }}</span
             >
             <p class="text-gray-600 flex justify-between">
@@ -198,7 +198,7 @@
           </p>
           <p class="text-gray-700">{{ experience?.employer }}</p>
           <p class="text-gray-700">
-            {{ experience?.industry }}, {{ experience?.fieldOfActivity }},
+            {{ experience?.industry }} <span *ngIf="experience?.industry">, </span> {{ experience?.fieldOfActivity }} <span *ngIf="experience?.fieldOfActivity">, </span> 
             {{ experience?.careerLevel }}
           </p>
 

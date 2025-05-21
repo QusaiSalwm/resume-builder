@@ -262,7 +262,7 @@
 
             </div>
             <span class="text-sm text-gray-600 font-semibold">
-              {{ training?.startDate |  date:'MM.yyyy'  }} –
+              {{ training?.startDate |  date:'MM.yyyy'  }} <span *ngIf="training?.startDate">-</span>
               {{ training?.endDate |  date:'MM.yyyy'  }}</span
             >
           </div>

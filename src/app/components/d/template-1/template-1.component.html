@@ -251,7 +251,7 @@
           >
             <p class="font-semibold">{{ training?.college }}</p>
             <p class="text-sm text-gray-600">
-              {{ training?.startDate | date : "yyyy" }} –
+              {{ training?.startDate | date : "yyyy" }} <span *ngIf="training?.startDate">-</span>
               {{ training?.endDate | date : "yyyy" }}
             </p>
             <p class="font-normal">{{ training?.diploma }}</p>
@@ -282,7 +282,7 @@
             <p class="font-semibold">{{ experience?.employer }}</p>
             <p class="text-sm text-gray-600">
               {{ experience?.startDate | date : "MM.yyyy" }}
-              <span *ngIf="experience?.startDate">-</span>
+              <span *ngIf="experience?.startDate">- </span>
               <span *ngIf="!experience?.stillInWork">
                 {{ experience?.endDate | date : "MM.yyyy" }}</span
               >
@@ -292,7 +292,7 @@
             </p>
             <p class="font-semibold">{{ experience?.jobTitle }}</p>
             <p class="text-sm text-gray-600">
-              {{ experience?.industry }}, {{ experience?.fieldOfActivity }},
+              {{ experience?.industry  }} <span *ngIf="experience?.industry">, </span> {{ experience?.fieldOfActivity }} <span *ngIf="experience?.fieldOfActivity">, </span>
               {{ experience?.careerLevel }}
             </p>
             <ul class="list-disc list-inside mt-2 text-sm">

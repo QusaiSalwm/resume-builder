@@ -147,7 +147,7 @@ export class ResumePreviewComponent {
 
     if (printContent) {
       document.body.innerHTML = printContent.innerHTML; // Replace body with template content
-      document.title = '';
+      document.title = this.resumeData.firstName ;
       window.print(); // Trigger print
       document.body.innerHTML = originalContent; // Restore original content
       location.reload(); // Reload to prevent issues

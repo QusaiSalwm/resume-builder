@@ -15,16 +15,7 @@ p{
 
 }
 
-@media print {
-  .clippath{
-  width: 400px;
-  height: 200px;
-  text-align: center;
-  word-break: break-all;
-  clip-path: polygon(100% 0, 74% 100%, 0 55%, 0 0);
 
-}
-}
 .name{
   margin-top: 45px;
   margin-inline-start: 10px;

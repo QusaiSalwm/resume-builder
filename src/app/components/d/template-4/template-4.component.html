@@ -1,4 +1,4 @@
-<div class="bg-white shadow-md p-8 border border-black min-w-[210mm] min-h-[297mm]">
+<div class="bg-white shadow-md p-8 border border-black h-100% overflow-auto min-w-[210mm] ">
   <!-- Header Section -->
   <div class="flex items-center gap-4 border-b pb-6 mb-2">
     <img
@@ -98,7 +98,7 @@
         }"
       ></div>
       <p class="text-gray-600">
-        {{ job.startDate |  date:'MM.yyyy'  }} -
+        {{ job.startDate |  date:'MM.yyyy'  }} <span *ngIf="job.startDate"> - </span>
         <span *ngIf="!experience?.stillInWork">
           {{ experience?.endDate |  date:'MM.yyyy'  }}</span
         >
@@ -140,7 +140,7 @@
         }"
       ></div>
       <p class="text-gray-600">
-        {{ edu.startDate |  date:'yyyy'  }} - {{ edu.endDate |  date:'yyyy'  }}
+        {{ edu.startDate |  date:'yyyy'  }} <span *ngIf="edu.startDate">-</span> {{ edu.endDate |  date:'yyyy'  }}
       </p>
       <p class="font-bold">{{ edu.specialization }}</p>
       <p class="text-gray-600">{{ edu.college }}</p>
