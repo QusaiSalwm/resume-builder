@@ -144,8 +144,9 @@
               <span *ngFor="let email of resumeData?.email; let isLast = last">
                 <p class="flex items-start gap-2">
                   <mat-icon> email</mat-icon>
+                  <span class="leading-relaxed break-words max-w-md">{{ email }}</span>
 
-                  {{ email }}<span *ngIf="!isLast"><br /></span>
+                  <span *ngIf="!isLast"><br /></span>
                 </p>
               </span>
             </div>
@@ -198,7 +199,7 @@
           </p>
           <p class="text-gray-700">{{ experience?.employer }}</p>
           <p class="text-gray-700">
-            {{ experience?.industry }} <span *ngIf="experience?.industry">, </span> {{ experience?.fieldOfActivity }} <span *ngIf="experience?.fieldOfActivity">, </span> 
+            {{ experience?.industry }} <span *ngIf="experience?.industry">, </span> {{ experience?.fieldOfActivity }} <span *ngIf="experience?.fieldOfActivity">, </span>
             {{ experience?.careerLevel }}
           </p>
 

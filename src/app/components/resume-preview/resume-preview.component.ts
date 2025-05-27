@@ -147,48 +147,51 @@ export class ResumePreviewComponent {
 
     if (printContent) {
       document.body.innerHTML = printContent.innerHTML; // Replace body with template content
-      document.title = this.resumeData.firstName ;
+      document.title = this.resumeData.firstName;
       window.print(); // Trigger print
       document.body.innerHTML = originalContent; // Restore original content
       location.reload(); // Reload to prevent issues
     }
   }
 
-  //   downloadPDF() {
-  //   const resumeElement = document.getElementById('scale1'); // Get the preview section
-  //   if (resumeElement) {
-  //     // Temporarily remove or override overflow-hidden
-  //     const hiddenElements = resumeElement.querySelectorAll('.pdf-content');
-  //     hiddenElements.forEach(el => {
-  //       const htmlElement = el as HTMLElement; // Cast to HTMLElement
-  //       htmlElement.classList.remove('overflow-hidden');
-  //       // htmlElement.style.overflow = 'visible'; // Ensure content is visible
-  //     });
+  downloadPDF1() {
+    const resumeElement = document.getElementById('scale1');
 
-  //     html2canvas(resumeElement, { scale: 2 }).then((canvas) => {
-  //       const imgData = canvas.toDataURL('image/png');
-  //       const pdf = new jsPDF('p', 'mm', 'a4');
-  //       pdf.setFontSize(10);
+    if (resumeElement) {
+      html2canvas(resumeElement, { scale: 5 })
+        .then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
 
-  //       const imgWidth = 210; // A4 width in mm
-  //       const imgHeight = (canvas.height * imgWidth) / canvas.width;
+          const pdf = new jsPDF('p', 'mm', 'a4');
+          const imgWidth = 210; // A4 width in mm
+          const pageHeight = 297; // A4 height in mm
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-  //       pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-  //       pdf.save('resume.pdf');
+          let heightLeft = imgHeight;
+          let position = 0;
 
-  //       // Restore the original styles after PDF generation
-  //       hiddenElements.forEach(el => {
-  //         const htmlElement = el as HTMLElement; // Cast to HTMLElement
-  //         htmlElement.classList.add('overflow-hidden');
-  //         htmlElement.style.overflow = 'hidden';
-  //       });
-  //     }).catch((error) => {
-  //       console.error('Error generating PDF:', error);
-  //     });
-  //   } else {
-  //     console.error('Resume content element not found');
-  //   }
-  // }
+          // First page
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+
+          // More pages
+          while (heightLeft > 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+          }
+
+          const fileName = `${this.resumeData.firstName}_${this.resumeData.lastName}_resume.pdf`;
+          pdf.save(fileName);
+        })
+        .catch((error) => {
+          console.error('Error generating PDF:', error);
+        });
+    } else {
+      console.error('Resume content element not found');
+    }
+  }
 
   getTransformOrigin(): string {
     if (this.overrideTransformOrigin && this.currentLang === 'ar') {

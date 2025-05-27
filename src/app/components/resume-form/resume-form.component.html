@@ -6,6 +6,7 @@
       [src]="profileImage || this.resumeData.source._value.profileImage"
       class="w-24 h-24 rounded-full border shadow-md object-cover mb-2"
       alt="Profile Image"
+      width="100"
     />
 
     <!-- Hidden File Input -->
@@ -28,12 +29,12 @@
     <div
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
     >
-      <div class="bg-white p-4 rounded-lg shadow-lg">
+      <div class="bg-white p-4 rounded-lg shadow-lg w-[50%]">
         <!-- Image Cropper -->
         <image-cropper
           [imageChangedEvent]="imageChangedEvent"
           [maintainAspectRatio]="true"
-          [aspectRatio]="1"
+          [aspectRatio]="1/1"
           [resizeToWidth]="300"
           format="png"
           (imageCropped)="imageCropped($event)"
@@ -477,7 +478,7 @@
       {{ "IMPORT_JSON" | translate }}
     </button>
 
-    <button mat-raised-button color="primary" (click)="downloadPDF()">
+    <button *ngIf="currentLanguage == 'ar'" mat-raised-button color="primary" (click)="downloadPDF()">
       {{ "SAVE" | translate }}
     </button>
 

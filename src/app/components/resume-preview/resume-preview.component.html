@@ -1,6 +1,11 @@
-<div class="border-black max-h-840px md:bg-[#E6E6E6]" id="cont">
+
+
+<div class="border-black max-h-840px overflow-auto md:bg-[#E6E6E6]" id="cont">
   <div class="flex items-center justify-between">
     <app-color-switcher></app-color-switcher>
+    <button *ngIf="currentLang != 'ar'" mat-raised-button color="primary" (click)="downloadPDF1()" class="text-sm p-0 me-[20px]">
+  {{ "SAVE" | translate }}
+</button>
 
     <!-- <button mat-raised-button color="primary" (click)="openPreviewDialog()" >
       {{ "PREVIEW" | translate }}

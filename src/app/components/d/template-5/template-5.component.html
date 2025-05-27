@@ -1,5 +1,5 @@
-<div class="flex justify-center w-[210mm] min-h-[297mm]">
-  <div class="bg-white shadow-lg">
+<div class="flex justify-center min-w-[210mm] min-h-[297mm]">
+  <div class="bg-white shadow-lg w-full">
     <!-- Header Section -->
     <div
       class="text-white text-center py-10 relative min-w-[210mm] max-w-[210mm]"
@@ -98,7 +98,7 @@
               class="flex gap-2"
             >
               <mat-icon>email</mat-icon>
-              <p class="leading-relaxed break-words">
+              <p class="leading-relaxed break-words max-w-md">
                 {{ email }}
               </p>
               <span *ngIf="i !== resumeData.email.length - 1"></span>

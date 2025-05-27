@@ -1,6 +1,6 @@
 <div class="">
   <div
-    class="bg-white flex flex-col justify-center max-w-[210mm] min-h-[297mm] max-h-[297mm] overflow-y-auto relative resume-contnet"
+    class="bg-white flex flex-col justify-center max-w-[210mm] min-h-[297mm]  overflow-y-auto relative resume-contnet"
     #resumeContent
   >
     <!-- Header Section (Name & Image) -->
@@ -125,7 +125,7 @@
                   class="flex gap-2"
                 >
                   <mat-icon>email</mat-icon>
-                  <p class="leading-relaxed break-words">
+                  <p class="leading-relaxed break-words max-w-md">
                     {{ email }}
                   </p>
                   <span *ngIf="i !== resumeData.email.length - 1"></span>

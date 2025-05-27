@@ -113,8 +113,9 @@
                 >
                   <p class="flex items-start gap-2">
                     <mat-icon> email</mat-icon>
+                    <span class="leading-relaxed break-words max-w-md">{{email}}</span>
 
-                    {{ email }}<span *ngIf="!isLast"><br /></span>
+                    <span *ngIf="!isLast"><br /></span>
                   </p>
                 </span>
               </div>

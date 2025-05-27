@@ -2,3 +2,8 @@
   overflow: visible;
   margin-inline-start: 10px;
 }
+::ng-deep .fixed-cropper {
+  width: 300px !important;
+  height: 300px !important;
+  object-fit: contain;
+}
