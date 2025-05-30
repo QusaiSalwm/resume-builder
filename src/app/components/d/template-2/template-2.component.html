@@ -163,6 +163,51 @@
           </ul>
         </div>
 
+        <div
+        class="mt-6"
+        *ngIf="resumeData?.languages && resumeData?.languages.length > 0"
+      >
+        <p
+
+          class="text-lg font-normal border-b-4 border-b-[rgba(20, 71, 108, 0.2)] w-full inline-block print:mt-5"
+        >
+          {{ "LANGUAGES" | translate }}
+        </p>
+        <ul class="text-sm px-2">
+          <li
+            [ngStyle]="{
+              color: selectedTheme != 'gbRiAl' ? 'black' : white
+            }"
+            *ngFor="let lang of resumeData?.languages"
+          >
+            <p>{{ lang.language }} - {{lang.level}}</p>
+          </li>
+        </ul>
+      </div>
+
+      <div
+          class="mt-6"
+          *ngIf="resumeData?.hobbies && resumeData?.hobbies.length > 0"
+        >
+          <p
+          class="text-lg font-normal border-b-4 border-b-[rgba(20, 71, 108, 0.2)] w-full inline-block print:mt-5"
+
+          >
+            {{ "HOBBIES" | translate }}
+          </p>
+          <ul class="text-sm px-2 grid grid-cols-6">
+            <li *ngFor="let hobby of resumeData?.hobbies">
+              <mat-icon
+                [ngStyle]="{
+                  color: selectedTheme != 'gbRiAl' ? 'black' : white,
+                }"
+              >
+                {{ hobby }}</mat-icon
+              >
+            </li>
+          </ul>
+        </div>
+
         <div class="mt-6 max-w-md overflow-hidden" *ngIf="resumeData?.aboutMe">
           <p
             class="text-lg font-normal border-b-4 border-b-[rgba(20, 71, 108, 0.2)] w-full inline-block print:mt-5"
@@ -193,7 +238,7 @@
             <p class="font-semibold flex justify-between">
               {{ experience?.employer }}
               <span class="text-gray-500 text-xs"
-                ><p class="text-sm text-gray-600">
+                ><p class="text-sm text-[#0A5A5B]">
                   {{ experience?.startDate |  date:'MM.yyyy'  }}
                   <span *ngIf="experience?.startDate">-</span>
                   <span *ngIf="!experience.stillInWork">

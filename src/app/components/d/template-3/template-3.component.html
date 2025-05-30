@@ -52,6 +52,52 @@
       </div>
 
       <div
+        class="mt-6"
+        *ngIf="resumeData?.languages && resumeData?.languages.length > 0"
+      >
+        <p
+
+          class="text-2xl font-normal border-b-2 border-b-gray-500 text-black w-full inline-block print:mt-5"
+        >
+          {{ "LANGUAGES" | translate }}
+        </p>
+        <ul class="text-sm px-2">
+          <li
+            [ngStyle]="{
+              color: selectedTheme != 'gbRiAl' ? 'black' : white
+            }"
+            *ngFor="let lang of resumeData?.languages"
+          >
+            <p>{{ lang.language }} - {{lang.level}}</p>
+          </li>
+        </ul>
+      </div>
+
+      <div
+          class="mt-6"
+          *ngIf="resumeData?.hobbies && resumeData?.hobbies.length > 0"
+        >
+          <p
+          class="text-2xl font-normal border-b-2 border-b-gray-500 text-black w-full inline-block print:mt-5"
+
+
+          >
+            {{ "HOBBIES" | translate }}
+          </p>
+          <ul class="text-sm px-2 grid grid-cols-6">
+            <li *ngFor="let hobby of resumeData?.hobbies">
+              <mat-icon
+                [ngStyle]="{
+                  color: selectedTheme != 'gbRiAl' ? 'black' : white,
+                }"
+              >
+                {{ hobby }}</mat-icon
+              >
+            </li>
+          </ul>
+        </div>
+
+      <div
         class="mt-4"
         *ngIf="resumeData?.training && resumeData?.training.length > 0"
       >

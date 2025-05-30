@@ -1,6 +1,6 @@
 <div class="">
   <div
-    class="bg-white flex flex-col justify-center max-w-[210mm] min-h-[297mm]  overflow-y-auto relative resume-contnet"
+    class="bg-white flex flex-col justify-center max-w-[210mm] min-h-[297mm] overflow-y-auto relative resume-contnet"
     #resumeContent
   >
     <!-- Header Section (Name & Image) -->
@@ -35,7 +35,7 @@
     <div class="flex flex-1 resume-content">
       <!-- Left Sidebar (Fixed Full Height) -->
       <div
-        class="w-1/3 text-white p-6 flex flex-col"
+        class="w-[40%] text-white p-6 flex flex-col"
         [ngStyle]="{
           'background-color':
             selectedTheme === 'custom'
@@ -57,12 +57,12 @@
               resumeData?.country ||
               resumeData?.phone
             "
-            class="text-lg font-semibold border-2 px-2 rounded-full inline-block print:mt-5"
+            class="text-[14px] font-semibold border-2 px-2 rounded-full inline-block print:mt-5"
           >
             {{ "CONTACT" | translate }}
           </p>
 
-          <ul class="text-sm space-y-2 overflow-hidden">
+          <ul class="text-[10px] space-y-2 overflow-hidden">
             <li
               class="flex justify-start items-start gap-2"
               *ngIf="resumeData?.address"
@@ -83,7 +83,7 @@
                 color: selectedTheme != 'gbRiAl' ? 'black' : 'white'
               }"
             >
-              <mat-icon>location_city</mat-icon>
+              <mat-icon class="text-[10px]">location_city</mat-icon>
               <span class="leading-relaxed break-words max-w-md"
                 >{{ resumeData?.zipCode }} {{ resumeData?.city }}</span
               >
@@ -133,7 +133,7 @@
               </p>
             </li>
             <li
-              class="flex items-center flex-wrap"
+              class=""
               *ngIf="resumeData?.birthDate || resumeData?.placeOfBirth"
               [ngStyle]="{
                 color: selectedTheme != 'gbRiAl' ? 'black' : 'white'
@@ -141,14 +141,14 @@
             >
               <mat-icon>date_range</mat-icon>
 
-              <span class="whitespace-nowrap">{{
-                resumeData?.birthDate | date : "dd.MM.yyyy"
-              }}</span>
-              ,
-              <br />
-              <span class="leading-relaxed break-words max-w-md">{{
-                resumeData?.placeOfBirth
-              }}</span>
+              <span class="leading-relaxed break-words max-w-full h-full">
+                <span class="">{{
+                  resumeData?.birthDate | date : "dd.MM.yyyy"
+                }}</span>
+                ,
+
+                <span>{{ resumeData?.placeOfBirth }}</span>
+              </span>
             </li>
           </ul>
         </div>
@@ -162,7 +162,7 @@
               color: selectedTheme != 'gbRiAl' ? 'black' : 'white',
               borderColor: selectedTheme != 'gbRiAl' ? 'black' : 'white'
             }"
-            class="text-lg font-semibold border-2 px-4 py-1 rounded-full inline-block"
+            class="text-[14px] font-semibold border-2 px-4 py-1 rounded-full inline-block"
           >
             {{ "SKILLS" | translate }}
           </p>
@@ -180,6 +180,31 @@
 
         <div
           class="mt-6"
+          *ngIf="resumeData?.languages && resumeData?.languages.length > 0"
+        >
+          <p
+            [ngStyle]="{
+              color: selectedTheme != 'gbRiAl' ? 'black' : 'white',
+              borderColor: selectedTheme != 'gbRiAl' ? 'black' : 'white'
+            }"
+            class="text-[14px] font-semibold border-2 px-4 py-1 rounded-full inline-block"
+          >
+            {{ "LANGUAGES" | translate }}
+          </p>
+          <ul class="text-sm px-2">
+            <li
+              [ngStyle]="{
+                color: selectedTheme != 'gbRiAl' ? 'black' : white
+              }"
+              *ngFor="let lang of resumeData?.languages"
+            >
+              <p>{{ lang.language }} - {{ lang.level }}</p>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="mt-6"
           *ngIf="resumeData?.hobbies && resumeData?.hobbies.length > 0"
         >
           <p
@@ -187,11 +212,11 @@
               color: selectedTheme != 'gbRiAl' ? 'black' : white,
               borderColor: selectedTheme != 'gbRiAl' ? 'black' : 'white'
             }"
-            class="text-lg font-semibold border-2 px-4 py-1 rounded-full inline-block"
+            class="text-[14px] font-semibold border-2 px-4 py-1 rounded-full inline-block"
           >
             {{ "HOBBIES" | translate }}
           </p>
-          <ul class="text-sm px-2">
+          <ul class="text-sm px-2 grid grid-cols-6">
             <li *ngFor="let hobby of resumeData?.hobbies">
               <mat-icon
                 [ngStyle]="{
@@ -210,7 +235,7 @@
               color: selectedTheme != 'gbRiAl' ? 'black' : white,
               borderColor: selectedTheme != 'gbRiAl' ? 'black' : 'white'
             }"
-            class="text-lg font-semibold border-2 px-4 py-1 rounded-full inline-block"
+            class="text-[14px] font-semibold border-2 px-4 py-1 rounded-full inline-block"
           >
             {{ "ABOUT_ME" | translate }}
           </p>
@@ -228,13 +253,13 @@
       </div>
 
       <!-- Right Content -->
-      <div class="w-2/3">
+      <div class="w-[60%]">
         <div
-          class="mt-4"
+          class="mt-2"
           *ngIf="resumeData?.training && resumeData?.training.length > 0"
         >
           <p
-            class="text-lg font-semibold text-white px-4 py-1 inline-block rounded-tr-full rounded-br-full rtl:rounded-tl-full rtl:rounded-bl-full rtl:rounded-tr-none rtl:rounded-br-none"
+            class="text-[14px] font-semibold text-white px-4 py-1 inline-block rounded-tr-full rounded-br-full rtl:rounded-tl-full rtl:rounded-bl-full rtl:rounded-tr-none rtl:rounded-br-none"
             [ngStyle]="{
               'background-color':
                 selectedTheme === 'custom'
@@ -247,15 +272,23 @@
           </p>
           <div
             *ngFor="let training of resumeData?.training"
-            class="mt-4 px-6 text-black"
+            class="mt-2 px-6 text-black"
           >
-            <p class="font-semibold">{{ training?.college }}</p>
-            <p class="text-sm text-gray-600">
-              {{ training?.startDate | date : "yyyy" }} <span *ngIf="training?.startDate">-</span>
+            <span class="m-0 font-semibold text-[11px] block">{{
+              training?.college
+            }}</span>
+            <span class="text-[8px] text-[#0A5A5B]">
+              {{ training?.startDate | date : "yyyy" }}
+              <span *ngIf="training?.startDate">-</span>
               {{ training?.endDate | date : "yyyy" }}
-            </p>
-            <p class="font-normal">{{ training?.diploma }}</p>
-            <p class="font-normal">{{ training?.specialization }}</p>
+            </span>
+
+            <span class="font-normal text-[10px] block">{{
+              training?.diploma
+            }}</span>
+            <span class="font-normal text-[11px]">{{
+              training?.specialization
+            }}</span>
           </div>
         </div>
 
@@ -264,7 +297,7 @@
           *ngIf="resumeData?.experience && resumeData?.experience.length > 0"
         >
           <p
-            class="text-lg font-semibold text-white px-4 py-1 inline-block rounded-tr-full rounded-br-full rtl:rounded-tl-full rtl:rounded-bl-full rtl:rounded-tr-none rtl:rounded-br-none"
+            class="text-[14px] font-semibold text-white px-4 py-1 inline-block rounded-tr-full rounded-br-full rtl:rounded-tl-full rtl:rounded-bl-full rtl:rounded-tr-none rtl:rounded-br-none print:pb-[20px]"
             [ngStyle]="{
               'background-color':
                 selectedTheme === 'custom'
@@ -273,14 +306,16 @@
               color: 'white'
             }"
           >
-            {{ "EXPERIENCE" | translate }}
+            <span class="print:-mt-[20px]">{{ "EXPERIENCE" | translate }}</span>
           </p>
           <div
             class="mt-4 px-6 text-black"
             *ngFor="let experience of resumeData?.experience"
           >
-            <p class="font-semibold">{{ experience?.employer }}</p>
-            <p class="text-sm text-gray-600">
+            <span class="font-semibold text-[12px]">{{
+              experience?.employer
+            }}</span>
+            <p class="text-[8px] text-[#0A5A5B]">
               {{ experience?.startDate | date : "MM.yyyy" }}
               <span *ngIf="experience?.startDate">- </span>
               <span *ngIf="!experience?.stillInWork">
@@ -290,12 +325,15 @@
                 {{ "NOW" | translate }}</span
               >
             </p>
-            <p class="font-semibold">{{ experience?.jobTitle }}</p>
-            <p class="text-sm text-gray-600">
-              {{ experience?.industry  }} <span *ngIf="experience?.industry">, </span> {{ experience?.fieldOfActivity }} <span *ngIf="experience?.fieldOfActivity">, </span>
+            <p class="font-normal text-[11px]">{{ experience?.jobTitle }}</p>
+            <p class="text-[11px] text-gray-600">
+              {{ experience?.industry }}
+              <span *ngIf="experience?.industry">, </span>
+              {{ experience?.fieldOfActivity }}
+              <span *ngIf="experience?.fieldOfActivity">, </span>
               {{ experience?.careerLevel }}
             </p>
-            <ul class="list-disc list-inside mt-2 text-sm">
+            <ul class="list-disc list-inside mt-2 text-[10px]">
               <li *ngFor="let task of experience?.tasks">{{ task }}</li>
             </ul>
           </div>

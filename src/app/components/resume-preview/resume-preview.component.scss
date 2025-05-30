@@ -42,8 +42,8 @@
 //   }
 // }
 
-.scale-left{
-   transform: scale(0.4); /* Default scale for non-mobile devices */
+.scale-left {
+  transform: scale(0.4); /* Default scale for non-mobile devices */
   // transform-origin: top left;
   width: 210mm;
   min-height: 297mm;
@@ -53,8 +53,8 @@
   // transition-duration: 1s;
   // transition: all 0.3s ease;
 }
-.scale-right{
-   transform: scale(0.4); /* Default scale for non-mobile devices */
+.scale-right {
+  transform: scale(0.4); /* Default scale for non-mobile devices */
   // transform-origin: top right;
   width: 210mm;
   min-height: 297mm;
@@ -93,30 +93,28 @@
     max-height: 400px;
   }
 
-
-
-  .scale-left{
-   transform: scale(0.4); /* Default scale for non-mobile devices */
-  // transform-origin: top left;
-  width: 210mm;
-  min-height: 297mm;
-  margin: 0 auto;
-  overflow: hidden;
-  margin-inline-start: 40px;
-  // transition-duration: 1s;
-  // transition: all 0.3s ease;
-}
-.scale-right{
-   transform: scale(0.4); /* Default scale for non-mobile devices */
-  // transform-origin: top right;
-  width: 210mm;
-  min-height: 297mm;
-  margin: 0 auto;
-  overflow: hidden;
-  margin-inline-start: 40px;
-  // transition-duration:1s ;
-  // transition: all 0.3s ease;
-}
+  .scale-left {
+    transform: scale(0.4); /* Default scale for non-mobile devices */
+    // transform-origin: top left;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-inline-start: 40px;
+    // transition-duration: 1s;
+    // transition: all 0.3s ease;
+  }
+  .scale-right {
+    transform: scale(0.4); /* Default scale for non-mobile devices */
+    // transform-origin: top right;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-inline-start: 40px;
+    // transition-duration:1s ;
+    // transition: all 0.3s ease;
+  }
 }
 
 .scale1 {
@@ -171,7 +169,8 @@
   }
 }
 /* Default styles for all devices */
-.scale1, .scale2 {
+.scale1,
+.scale2 {
   transform: scale(0.4); /* Default scale for non-mobile devices */
   transform-origin: top right;
   width: 210mm;
@@ -192,15 +191,15 @@
     transform-origin: top right;
   }
 
-  .scale1{
+  .scale1 {
     margin-inline-start: 0;
   }
 }
-@media print{
-  *{
+@media print {
+  * {
     margin: 0;
   }
-  @page{
-    size:a4
+  @page {
+    size: a4;
   }
 }

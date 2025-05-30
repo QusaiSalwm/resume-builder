@@ -141,7 +141,7 @@
               : colorThemesNew[selectedTheme].head,
         }"
       ></div>
-      <p class="text-gray-600">
+      <p class="text-[#0A5A5B]">
         {{ edu.startDate |  date:'yyyy'  }} <span *ngIf="edu.startDate">-</span> {{ edu.endDate |  date:'yyyy'  }}
       </p>
       <p class="font-bold">{{ edu.specialization }}</p>
@@ -170,4 +170,26 @@
       >{{ skill }}</span
     >
   </div>
+
+  <div
+        class="mt-6"
+        *ngIf="resumeData?.languages && resumeData?.languages.length > 0"
+      >
+        <p
+
+          class="mt-8 text-xl font-semibold"
+        >
+          {{ "LANGUAGES" | translate }}
+        </p>
+        <ul class="text-sm px-2">
+          <li
+            [ngStyle]="{
+              color: selectedTheme != 'gbRiAl' ? 'black' : white
+            }"
+            *ngFor="let lang of resumeData?.languages"
+          >
+            <p>{{ lang.language }} - {{lang.level}}</p>
+          </li>
+        </ul>
+      </div>
 </div>

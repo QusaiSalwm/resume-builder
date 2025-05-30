@@ -76,3 +76,12 @@ mat-icon{
   padding: 20px;
   margin-bottom: 20px;
 }
+.mat-icon{
+  font-size: 10px;
+}
+:host ::ng-deep .mat-body-large p,
+.mat-typography .mat-body-large p,
+.mat-typography p {
+  margin: 0 !important;
+}
+
