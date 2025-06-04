@@ -17,7 +17,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { ImageCropperComponent } from 'ngx-image-cropper';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ResumeDialogComponent } from '../resume-dialog/resume-dialog.component';
@@ -26,6 +26,19 @@ import { PdfService } from '../../services/pdf.service';
 import { DialogConfig } from '@angular/cdk/dialog';
 import { LanguageService } from '../../services/language.service';
 import { MatSelectModule } from '@angular/material/select';
+import { CustomDateAdapter } from '../../shared/date-adapter';
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-resume-form',
@@ -46,7 +59,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatSnackBarModule,
     MatSelectModule
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [
+    { provide: DateAdapter, useClass: CustomDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+  ],
   templateUrl: './resume-form.component.html',
   styleUrl: './resume-form.component.scss',
 })
@@ -523,29 +540,23 @@ export class ResumeFormComponent implements OnInit {
     let dir = lang == 'ar' ? 'rtl' : 'ltr';
 
     const dialogConf = new MatDialogConfig();
-    dialogConf.width = '700px';
+    dialogConf.width = '100%';
+    dialogConf.maxWidth = '100vw';
+    dialogConf.height = '100%';
+    dialogConf.maxHeight = '100vh';
     dialogConf.disableClose = true;
     dialogConf.autoFocus = false;
+    dialogConf.panelClass = 'full-screen-dialog';
 
     if (lang === 'ar') {
       dialogConf.direction = 'rtl';
     } else {
       dialogConf.direction = 'ltr';
     }
-    dialogConf.minWidth = '99%';
-    dialogConf.minHeight = '85%';
 
     dialogConf.enterAnimationDuration = '700ms';
 
     const dialogRef = this.dialog.open(ResumeDialogComponent, dialogConf);
-
-    // // Wait for the dialog to close and get the result
-    // const result = await dialogRef.afterClosed().toPromise();
-
-    // if (result === 'refresh') {
-    //   await this.getCompanies();
-    //   await this.updateModels(company_id);
-    // }
   }
 
   downloadPDF() {

@@ -156,24 +156,37 @@ export class ResumePreviewComponent {
 
   downloadPDF1() {
     const resumeElement = document.getElementById('scale1');
-
     if (resumeElement) {
-      html2canvas(resumeElement, { scale: 5 })
+      // Clone the resume element to avoid modifying the preview
+      const clone = resumeElement.cloneNode(true) as HTMLElement;
+      // Remove scaling from the clone
+      clone.style.transform = 'none';
+      clone.style.transformOrigin = 'top left';
+      clone.style.width = '210mm';
+      clone.style.height = 'auto';
+      clone.style.margin = '0';
+      clone.style.padding = '0';
+      clone.style.overflow = 'hidden';
+      // Append clone to body temporarily
+      document.body.appendChild(clone);
+      // Use html2canvas with higher scale and quality settings
+      html2canvas(clone, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        allowTaint: true,
+      })
         .then((canvas) => {
-          const imgData = canvas.toDataURL('image/png');
-
+          const imgData = canvas.toDataURL('image/png', 1.0);
           const pdf = new jsPDF('p', 'mm', 'a4');
           const imgWidth = 210; // A4 width in mm
           const pageHeight = 297; // A4 height in mm
           const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
           let heightLeft = imgHeight;
           let position = 0;
-
           // First page
           pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
           heightLeft -= pageHeight;
-
           // More pages
           while (heightLeft > 0) {
             position = heightLeft - imgHeight;
@@ -181,12 +194,17 @@ export class ResumePreviewComponent {
             pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
             heightLeft -= pageHeight;
           }
-
           const fileName = `${this.resumeData.firstName}_${this.resumeData.lastName}_resume.pdf`;
           pdf.save(fileName);
+          // Remove the clone from the DOM
+          document.body.removeChild(clone);
         })
         .catch((error) => {
           console.error('Error generating PDF:', error);
+          // Clean up clone in case of error
+          if (document.body.contains(clone)) {
+            document.body.removeChild(clone);
+          }
         });
     } else {
       console.error('Resume content element not found');

@@ -21,11 +21,12 @@
 
     <div class="text-center mt-16 px-10 min-h-[60px]">
       <p
-        class="text-2xl font-semibold"
+        class="-ml-[50%] text-2xl font-semibold md:-ml-[0]"
         *ngIf="resumeData.firstName || resumeData.lastName"
       >
         {{ resumeData.firstName }} {{ resumeData.lastName }}
       </p>
+
       <p
         class="text-sm text-gray-600 mt-2 break-words max-w-2xl items-center"
         *ngIf="resumeData.aboutMe"
@@ -42,7 +43,7 @@
     <div class="flex mt-8">
       <!-- Left Column -->
       <div
-        class="w-[40%] text-white px-6 py-8 min-h-[244mm]"
+        class="text-white px-6 py-8 min-h-[244mm]"
         [ngStyle]="{
           'background-color':
             selectedTheme === 'custom'
@@ -140,32 +141,29 @@
           </li>
         </ul>
 
-
         <div
-        class="mt-6"
-        *ngIf="resumeData?.hobbies && resumeData?.hobbies.length > 0"
-      >
-        <p class="text-xl font-semibold mt-20 mb-10">
-          {{ "HOBBIES" | translate }}
-        </p>
-        <ul class="text-sm px-2 grid grid-cols-6">
-          <li *ngFor="let hobby of resumeData?.hobbies">
-            <mat-icon
-              [ngStyle]="{
+          class="mt-6"
+          *ngIf="resumeData?.hobbies && resumeData?.hobbies.length > 0"
+        >
+          <p class="text-xl font-semibold mt-20 mb-10">
+            {{ "HOBBIES" | translate }}
+          </p>
+          <ul class="text-sm px-2 grid grid-cols-6">
+            <li *ngFor="let hobby of resumeData?.hobbies">
+              <mat-icon
+                [ngStyle]="{
               color: selectedTheme != 'gbRiAl' ? 'black' : white,
             }"
-            >
-              {{ hobby }}</mat-icon
-            >
-          </li>
-        </ul>
+              >
+                {{ hobby }}</mat-icon
+              >
+            </li>
+          </ul>
+        </div>
       </div>
-      </div>
-
-
 
       <!-- Right Column -->
-      <div class="w-[60%] px-8 py-8">
+      <div class="w-1/2 px-8 py-8">
         <p
           class="text-2xl font-semibold mb-6"
           *ngIf="resumeData.experience && resumeData.experience.length > 0"

@@ -1,4 +1,4 @@
-<div [dir]="dir" class="m-2 w-[100%] ">
+<div [dir]="dir" class="m-2 w-[100%]">
   <button
     (click)="close()"
     mat-raised-button
@@ -8,17 +8,17 @@
     X
   </button>
 </div>
-<div class=" flex flex-col md:flex-row h-[calc(100vh)]">
-  <!-- Fixed Preview Section (left side) -->
-  <div class="w-full  overflow-hidden md:w-3/4 p-6 sticky top-0 md:h-screen md:overflow-y-hidden">
+<div class="flex flex-col md:flex-row h-[calc(100vh-60px)]">
+  <!-- Preview Section -->
+  <div class="flex-grow md:w-3/4 p-6 overflow-y-auto md:h-[calc(100vh-60px)]">
     <app-resume-preview
       [currentLang]="currentLang"
       [overrideTransformOrigin]="currentLang === 'ar'"
     ></app-resume-preview>
   </div>
 
-  <!-- Scrollable Template Selector Section (right side) -->
-  <div class="w-full md:w-1/4 p-6 overflow-y-auto h-[90%]">
+  <!-- Template Selector Section -->
+  <div class="w-full md:w-1/4 p-6 md:overflow-y-auto md:h-[calc(100vh-60px)] h-40 md:h-auto bg-white md:bg-transparent shadow-inner md:shadow-none">
     <app-template-selector class="flex flex-col"></app-template-selector>
   </div>
 </div>
